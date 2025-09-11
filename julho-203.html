@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório Financeiro - Ap. 203</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #0f172a;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tabs button {
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tabs button:hover,
+    .tabs button.active {
+      background: #0369a1;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th { background: #e2e8f0; }
+    tr:hover { background: #f1f5f9; }
+
+    .receita { color: green; font-weight: bold; }
+    .despesa { color: red; font-weight: bold; }
+
+    /* PLATAFORMA STYLES */
+    .plataforma-booking {
+      background: #003580;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .plataforma-airbnb {
+      background: #FF5A5F;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .plataforma-direta {
+      background: #28a745;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .status-recebido {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .status-aguardando {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .status-concluido {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .resumo-anterior {
+      background: #e3f2fd;
+      border: 2px solid #1976d2;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .resumo-anterior h3 {
+      color: #1976d2;
+      margin-top: 0;
+    }
+
+    .pendente {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    /* NAVBAR STYLES */
+    .navbar {
+      background: #002c7e;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+      color: #ffd700;
+    }
+
+    .navbar-brand .icon {
+      font-size: 1.8rem;
+      margin-right: 10px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-toggle:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      margin-top: 10px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background: #076bcf;
+      color: #eeeff4;
+      padding-left: 25px;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .dropdown-item:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+
+    .dropdown-header {
+      padding: 10px 20px 5px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #f3f3f6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #f0f0f0;
+      background-color: #0ea5e9;
+    }
+
+  
+  </style>
+</head>
+<body>
+   <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <span class="icon">🏠</span>
+        <span>Fechamento de Caixa</span>
+      </a>
+
+      <ul class="navbar-nav">
+        <!-- Dropdown Apartamentos -->
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-toggle">
+            🏢 Apartamentos <span>▼</span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Apto 105 - Principal</div>
+            <a href="junho-105.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-105.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-105.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-105.html" class="dropdown-item">📉 Setembro 2025</a>
+
+            <div class="dropdown-header">Apto 203 - Intermediário</div>
+            <a href="junho-203.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-203.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-203.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-203.html" class="dropdown-item">📉 Setembro 2025</a>
+
+            <div class="dropdown-header">Apto 1006 - Golden View</div>
+            <a href="junho-1006.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-1006.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-1006.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-1006.html" class="dropdown-item">📉 Setembro 2025</a>
+
+            <div class="dropdown-header">Apto 804 - Premium</div>
+            <a href="junho-804.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-804.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-804.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-804.html" class="dropdown-item">📉 Setembro 2025</a>
+          </div>
+        </li>
+      </div>
+      </nav><br><hr>
+
+<header>
+  <h1>Relatório Financeiro - Apartamento 203</h1>
+  <h2>Julho 2025</h2>
+  <p>Edifício Golden Ville · Atualizado em 03/09/2025</p>
+</header>
+
+<!-- RESUMO MÊS ANTERIOR COM VALORES CORRETOS -->
+<div class="resumo-anterior">
+  <h3>📋 Resumo do Mês Anterior (Junho 2025)</h3>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+    <div><strong>Receitas Junho:</strong> R$ 2.665,80</div>
+    <div><strong>Despesas Junho:</strong> R$ 2.347,42</div>
+    <div><strong>Saldo Final Junho:</strong> R$ 318,38</div>
+    <div style="color: #28a745;"><strong>Saldo inicial para Julho</strong></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button onclick="mostrarAba('receitas')" class="active">Receitas</button>
+  <button onclick="mostrarAba('fixas')">Despesas Fixas</button>
+  <button onclick="mostrarAba('extras')">Despesas Extras</button>
+  <button onclick="mostrarAba('prestadores')">Prestadores</button>
+  <button onclick="mostrarAba('resumo')">Resumo Caixa</button>
+</div>
+
+<div id="receitas" class="tab-content active"></div>
+<div id="fixas" class="tab-content"></div>
+<div id="extras" class="tab-content"></div>
+<div id="prestadores" class="tab-content"></div>
+<div id="resumo" class="tab-content"></div>
+<br>
+<footer style="text-align: left; color: #088092; font-size: 1.0rem; margin-top: 20px;">
+  <a href="index.html" style="text-decoration: none; color: #212ad5; text-align: left;">🏠 Voltar para a Página Inicial</a><br>
+</footer>
+
+<script>
+  const dados = [
+    // Receitas Julho
+    { data: '04/07/2025', tipo: 'Receita', valor: 78.30, plataforma: 'BOOKING.COM', hospede: 'Damião Lopes', status: 'Recebido ✅' },
+    { data: '05/07/2025', tipo: 'Receita', valor: 86.00, plataforma: 'BOOKING.COM', hospede: 'Mayara Marques', status: 'Recebido ✅' },
+    { data: '06/07/2025', tipo: 'Receita', valor: 96.00, plataforma: 'BOOKING.COM', hospede: 'Andre Lucas', status: 'Recebido ✅' },
+    { data: '07/07/2025', tipo: 'Receita', valor: 370.00, plataforma: 'BOOKING.COM', hospede: 'Joelmir Pereira', status: 'Recebido ✅' },
+    { data: '11/07/2025', tipo: 'Receita', valor: 102.00, plataforma: 'BOOKING.COM', hospede: 'Nicollas Micallef', status: 'Recebido ✅' },
+    { data: '12/07/2025', tipo: 'Receita', valor: 100.00, plataforma: 'BOOKING.COM', hospede: 'Mayara Marques', status: 'Recebido ✅' },
+    { data: '13/07/2025', tipo: 'Receita', valor: 205.00, plataforma: 'BOOKING.COM', hospede: 'Myrella Ferrer', status: 'Recebido ✅' },
+    { data: '15/07/2025', tipo: 'Receita', valor: 280.00, plataforma: 'BOOKING.COM', hospede: 'Joelmir Pereira', status: 'Recebido ✅' },
+    { data: '18/07/2025', tipo: 'Receita', valor: 233.00, plataforma: 'BOOKING.COM', hospede: 'Thiago Souza', status: 'Recebido ✅' },
+    { data: '21/07/2025', tipo: 'Receita', valor: 370.00, plataforma: 'BOOKING.COM', hospede: 'Joelmir Pereira', status: 'Recebido ✅' },
+    { data: '26/07/2025', tipo: 'Receita', valor: 233.33, plataforma: 'BOOKING.COM', hospede: 'Chirinda Alberto', status: 'Recebido ✅' },
+    { data: '28/07/2025', tipo: 'Receita', valor: 370.00, plataforma: 'BOOKING.COM', hospede: 'Joelmir Pereira', status: 'Recebido ✅' },
+
+    // Despesas Fixas
+    { data: '10/07/2025', tipo: 'Despesa', valor: 416.95, descricao: 'Condomínio', categoria: 'Fixa', status: 'PAGO' },
+    { data: '16/07/2025', tipo: 'Despesa', valor: 251.96, descricao: 'Energia', categoria: 'Fixa', status: 'PAGO' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 74.59, descricao: 'IPTU', categoria: 'Fixa', status: 'PAGO' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 87.00, descricao: 'Stays', categoria: 'Fixa', status: 'PAGO' },
+    { data: '15/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business (umbler talk)', categoria: 'Fixa', status: 'PAGO' },
+    { data: '15/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automacoes', categoria: 'Fixa', status: 'PAGO' },
+
+    // Despesas Extras
+    { data: '10/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Jogo de cama (2/3)', categoria: 'Extra', status: 'PAGO' },
+    { data: '12/07/2025', tipo: 'Despesa', valor: 60.79, descricao: 'Compra no Pão de Açúcar', categoria: 'Extra', status: 'PAGO' },
+    { data: '18/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão Parcela 01 de 10 parcelas', categoria: 'Extra', status: 'PAGO' },
+
+    // Prestadores
+    { data: '05/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO' },
+    { data: '02/07/2025', tipo: 'Despesa', valor: 325.00, descricao: 'Prestação de serviços limpeza', categoria: 'Prestador', status: 'PAGO' },
+    { data: '10/06/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JUNHO', categoria: 'Prestador', status: 'PAGO' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JULHO', categoria: 'Prestador', status: 'PAGO' },
+    { data: '30/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie', categoria: 'Prestador', status: 'PAGO' },
+    { data: '30/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Devolução 100 reais Gabi', categoria: 'Prestador', status: 'PAGO' },
+];
+
+// Valor correto do saldo final de junho baseado nos dados reais
+const saldoFinalJunho = 318.38;
+
+function gerarTabela(lista, titulo) {
+  if (lista.length === 0) return `<p>Nenhum registro</p>`;
+
+  const isReceitas = lista.some(item => item.tipo === 'Receita');
+
+  let linhas = lista.map(item => {
+    if (item.tipo === 'Receita') {
+      // Para receitas - nova estrutura
+      let plataformaClass = '';
+      if (item.plataforma === 'BOOKING.COM') plataformaClass = 'plataforma-booking';
+      else if (item.plataforma === 'AIRBNB') plataformaClass = 'plataforma-airbnb';
+      else if (item.plataforma === 'RESERVA DIRETA') plataformaClass = 'plataforma-direta';
+
+      const statusClass = item.status && item.status.includes('Aguardando') ? 'status-aguardando' : 'status-concluido';
+      
+      return `
+      <tr>
+        <td>${item.data}</td>
+        <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
+        <td>R$ ${item.valor.toFixed(2)}</td>
+        <td><span class="${plataformaClass}">${item.plataforma}</span></td>
+        <td>${item.hospede}</td>
+        <td class="${statusClass}">${item.status}</td>
+      </tr>
+      `;
+    } else {
+      // Para despesas - estrutura antiga
+      const statusClass = item.status && item.status.includes('PENDENTE') ? 'pendente' : '';
+      return `
+      <tr>
+        <td>${item.data}</td>
+        <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
+        <td>R$ ${item.valor.toFixed(2)}</td>
+        <td colspan="2">${item.descricao}</td>
+        <td class="${statusClass}">${item.status || ''}</td>
+      </tr>
+      `;
+    }
+  }).join("");
+
+  const total = lista.reduce((s, d) => s + d.valor, 0);
+
+  const cabecalho = isReceitas ? 
+    `<tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th>Plataforma</th>
+      <th>Hóspede</th>
+      <th>Status</th>
+    </tr>` :
+    `<tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th colspan="2">Descrição</th>
+      <th>Status</th>
+    </tr>`;
+
+  const totalCols = isReceitas ? 4 : 3;
+
+  return `
+    <h2>${titulo}</h2>
+    <table>
+      <thead>
+        ${cabecalho}
+      </thead>
+      <tbody>
+        ${linhas}
+        <tr style="font-weight:bold; background:#f1f5f9;">
+          <td colspan="${totalCols}">Total</td>
+          <td>R$ ${total.toFixed(2)}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+}
+
+  function atualizarAbas() {
+    const receitas = dados.filter(d => d.tipo === 'Receita');
+    const fixas = dados.filter(d => d.categoria === 'Fixa');
+    const extras = dados.filter(d => d.categoria === 'Extra');
+    const prestadores = dados.filter(d => d.categoria === 'Prestador');
+
+    const totalReceitasJulho = receitas.reduce((s, d) => s + d.valor, 0);
+    const totalFixas = fixas.reduce((s, d) => s + d.valor, 0);
+    const totalExtras = extras.reduce((s, d) => s + d.valor, 0);
+    const totalPrestadores = prestadores.reduce((s, d) => s + d.valor, 0);
+    
+    // Cálculo correto: Saldo inicial + Receitas - Despesas
+    const totalDespesasJulho = totalFixas + totalExtras + totalPrestadores;
+    const caixaFinalJulho = saldoFinalJunho + totalReceitasJulho - totalDespesasJulho;
+
+    document.getElementById('receitas').innerHTML = gerarTabela(receitas, 'Receitas - Julho 2025');
+    document.getElementById('fixas').innerHTML = gerarTabela(fixas, 'Despesas Fixas');
+    document.getElementById('extras').innerHTML = gerarTabela(extras, 'Despesas Extras');
+    document.getElementById('prestadores').innerHTML = gerarTabela(prestadores, 'Prestadores de Serviço');
+
+    document.getElementById('resumo').innerHTML = `
+     <hr><br>
+    <h2>Resumo do Caixa - Julho 2025</h2><br>
+      
+      <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <h4 style="color: #1976d2;">💰 Continuidade de Junho:</h4>
+        <p><strong>Saldo Final de Junho:</strong> R$ 318,38</p>
+      </div>
+      
+      <h4>📊 Movimentação de Julho:</h4>
+      <p><strong>➕ Receitas Julho:</strong> R$ ${totalReceitasJulho.toFixed(2)}</p>
+      <p><strong>➖ Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
+      <p><strong>➖ Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
+      <p><strong>➖ Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
+      <p><strong>Total Despesas Julho:</strong> R$ ${totalDespesasJulho.toFixed(2)}</p>
+      
+      <hr><br>
+      
+      <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border: 2px solid #28a745;">
+        <h3 style="color: #28a745; margin: 0;">💰 CÁLCULO FINAL:</h3>
+        <p style="font-size: 1.1em; margin: 10px 0;">
+          <strong>R$ 318,38</strong> (saldo junho) + 
+          <strong>R$ ${totalReceitasJulho.toFixed(2)}</strong> (receitas julho) - 
+          <strong>R$ ${totalDespesasJulho.toFixed(2)}</strong> (despesas julho)
+        </p>
+        <hr style="border: 1px solid #28a745;">
+        <h2 style="color: #28a745; margin: 10px 0;">🎯 CAIXA FINAL JULHO: R$ ${caixaFinalJulho.toFixed(2)}</h2>
+      </div>
+      
+      <br>
+      <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+        <p style="margin: 0; color: #856404;"><strong>📝 Este saldo será usado como base para o cálculo de Agosto 2025</strong></p>
+      </div>
+    `;
+  }
+
+  function mostrarAba(id) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add('active');
+  }
+
+  atualizarAbas();
+</script>
+
+</body>
+</html>
