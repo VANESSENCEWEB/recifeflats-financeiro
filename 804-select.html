@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartamento 804 - Gestão Financeira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">804</div>
+          <div class="logo-text">
+            <h1>APARTAMENTO 804</h1>
+            <p>EDIFÍCIO FORTE SÃO PEDRO - PINA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Botão Voltar -->
+      <div style="margin-bottom: 2rem;">
+        <a href="index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--surface); color: var(--accent); text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease; box-shadow: var(--shadow); border: 1px solid var(--border);">
+          ← Voltar aos Apartamentos
+        </a>
+      </div>
+
+      <!-- Hero Section do Apartamento -->
+      <section class="hero-section">
+        <h2>Apartamento 804</h2>
+        <p>Selecione o mês para visualizar os relatórios financeiros detalhados</p>
+        
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Quartos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Ocupação</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">Premium</div>
+            <div class="stat-label">Categoria</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Months Section -->
+      <section class="apartments-section">
+        <div class="section-title">
+          <h3>Selecione o Mês</h3>
+          <p>Escolha o período para acessar os relatórios financeiros</p>
+        </div>
+
+        <div class="apartment-grid">
+          <!-- Junho 2025 -->
+          <div class="apartment-card" onclick="window.location.href='junho-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">JUN</div>
+              <div class="apartment-info">
+                <h4>Junho 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-junho">Carregando...</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-junho">Carregando...</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-junho">Carregando...</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-junho">Carregando...</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="junho-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Julho 2025 -->
+          <div class="apartment-card" onclick="window.location.href='julho-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">JUL</div>
+              <div class="apartment-info">
+                <h4>Julho 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-julho">Fechado</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-julho">R$ 4.187,15</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-julho">R$ 2.905,30</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-julho">R$ 1.281,85</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="julho-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Agosto 2025 -->
+          <div class="apartment-card" onclick="window.location.href='agosto-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">AGO</div>
+              <div class="apartment-info">
+                <h4>Agosto 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-agosto">Fechado</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-agosto">R$ 3.000,86</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-agosto">R$ 2.129,53</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-agosto">R$ 871,33</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="agosto-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Setembro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='setembro-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">SET</div>
+              <div class="apartment-info">
+                <h4>Setembro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-setembro">Carregando...</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-setembro">Carregando...</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-setembro">Carregando...</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-setembro">Carregando...</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="setembro-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Outubro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='outubro-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">OUT</div>
+              <div class="apartment-info">
+                <h4>Outubro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-outubro">Previsto</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-outubro">A definir</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-outubro">A definir</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-outubro">A definir</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="outubro-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Novembro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='novembro-804.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">NOV</div>
+              <div class="apartment-info">
+                <h4>Novembro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-novembro">Previsto</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-novembro">A definir</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-novembro">A definir</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-novembro">A definir</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="novembro-804.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="804-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p><span class="highlight">RECIFE FLATS TEMPORADA LTDA</span></p>
+        <p>Sistema de Gestão Financeira - Apartamento 804</p>
+        <p>Última atualização: Setembro 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Dados extraídos dos seus arquivos reais
+    const dadosReais = {
+      julho: {
+        receitas: [
+          { valor: 560.19, descricao: 'AIRBNB - Marcus Brener' },
+          { valor: 639.39, descricao: 'AIRBNB - Tatiana Saraiva' },
+          { valor: 1824, descricao: 'AIRBNB - Wesley Velloso' },
+          { valor: 400, descricao: 'AIRBNB - Isabela Vieira' },
+          { valor: 763.57, descricao: 'AIRBNB - Thiago Lacerda' }
+        ],
+        despesas: [
+          // Fixas
+          { valor: 770.43, categoria: 'Fixa' },
+          { valor: 290.22, categoria: 'Fixa' },
+          { valor: 138.47, categoria: 'Fixa' },
+          { valor: 241.36, categoria: 'Fixa' },
+          { valor: 86.73, categoria: 'Fixa' },
+          { valor: 50.00, categoria: 'Fixa' },
+          { valor: 25.00, categoria: 'Fixa' },
+          // Extras
+          { valor: 12.55, categoria: 'Extra' },
+          { valor: 34.92, categoria: 'Extra' },
+          { valor: 59.95, categoria: 'Extra' },
+          { valor: 33.00, categoria: 'Extra' },
+          { valor: 100.00, categoria: 'Extra' },
+          { valor: 60.00, categoria: 'Extra' },
+          // Prestadores
+          { valor: 100.00, categoria: 'Prestador' },
+          { valor: 325.00, categoria: 'Prestador' },
+          { valor: 93.75, categoria: 'Prestador' },
+          { valor: 50.00, categoria: 'Prestador' },
+          { valor: 433.92, categoria: 'Prestador' }
+        ]
+      },
+      agosto: {
+        receitas: [
+          { valor: 1813.49, descricao: 'AIRBNB - Lázaro Ferreira' },
+          { valor: 1187.37, descricao: 'AIRBNB - Janaína Varela' }
+        ],
+        despesas: [
+          // Fixas
+          { valor: 749.96, categoria: 'Fixa' },
+          { valor: 372.73, categoria: 'Fixa' },
+          { valor: 129.90, categoria: 'Fixa' },
+          { valor: 216.33, categoria: 'Fixa' },
+          { valor: 66.30, categoria: 'Fixa' },
+          // Extras
+          { valor: 22.79, categoria: 'Extra' },
+          { valor: 17.97, categoria: 'Extra' },
+          { valor: 390.00, categoria: 'Extra' },
+          { valor: 4.80, categoria: 'Extra' },
+          // Prestadores
+          { valor: 100.00, categoria: 'Prestador' },
+          { valor: 58.75, categoria: 'Prestador' }
+        ]
+      }
+    };
+
+    function calcularTotais(mes) {
+      const dados = dadosReais[mes];
+      if (!dados) return { receitas: 0, despesas: 0, resultado: 0 };
+
+      const totalReceitas = dados.receitas.reduce((sum, item) => sum + item.valor, 0);
+      const totalDespesas = dados.despesas.reduce((sum, item) => sum + item.valor, 0);
+      const resultado = totalReceitas - totalDespesas;
+
+      return {
+        receitas: totalReceitas,
+        despesas: totalDespesas,
+        resultado: resultado
+      };
+    }
+
+    function formatarMoeda(valor) {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(valor);
+    }
+
+    function atualizarCards() {
+      // Julho (dados reais)
+      const julhoTotais = calcularTotais('julho');
+      document.getElementById('receitas-julho').textContent = formatarMoeda(julhoTotais.receitas);
+      document.getElementById('despesas-julho').textContent = formatarMoeda(julhoTotais.despesas);
+      document.getElementById('resultado-julho').textContent = formatarMoeda(julhoTotais.resultado);
+
+      // Agosto (dados reais)
+      const agostoTotais = calcularTotais('agosto');
+      document.getElementById('receitas-agosto').textContent = formatarMoeda(agostoTotais.receitas);
+      document.getElementById('despesas-agosto').textContent = formatarMoeda(agostoTotais.despesas);
+      document.getElementById('resultado-agosto').textContent = formatarMoeda(agostoTotais.resultado);
+
+      // Colorir resultados
+      const resultadoJulho = document.getElementById('resultado-julho');
+      const resultadoAgosto = document.getElementById('resultado-agosto');
+      
+      if (julhoTotais.resultado > 0) {
+        resultadoJulho.style.color = 'var(--success)';
+      } else {
+        resultadoJulho.style.color = 'var(--danger)';
+      }
+
+      if (agostoTotais.resultado > 0) {
+        resultadoAgosto.style.color = 'var(--success)';
+      } else {
+        resultadoAgosto.style.color = 'var(--danger)';
+      }
+    }
+
+    // Função para simular carregamento e depois mostrar dados reais
+    function simularCarregamento() {
+      setTimeout(() => {
+        // Atualizar status
+        document.getElementById('status-junho').textContent = 'Sem dados';
+        document.getElementById('status-setembro').textContent = 'Sem dados';
+        
+        // Atualizar valores para meses sem dados
+        ['junho', 'setembro'].forEach(mes => {
+          document.getElementById(`receitas-${mes}`).textContent = 'Sem dados';
+          document.getElementById(`despesas-${mes}`).textContent = 'Sem dados';
+          document.getElementById(`resultado-${mes}`).textContent = 'Sem dados';
+        });
+
+        // Atualizar cards com dados reais
+        atualizarCards();
+      }, 1000);
+    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', simularCarregamento);
+  </script>
+</body>
+</html>
