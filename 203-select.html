@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartamento 203 - Gestão Financeira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">203</div>
+          <div class="logo-text">
+            <h1>APARTAMENTO 203</h1>
+            <p>EDIFÍCIO IPÊ - BOA VIAGEM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Botão Voltar -->
+      <div style="margin-bottom: 2rem;">
+        <a href="index.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: var(--surface); color: var(--accent); text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease; box-shadow: var(--shadow); border: 1px solid var(--border);">
+          ← Voltar aos Apartamentos
+        </a>
+      </div>
+
+      <!-- Hero Section do Apartamento -->
+      <section class="hero-section">
+        <h2>Apartamento 203</h2>
+        <p>Selecione o mês para visualizar os relatórios financeiros detalhados</p>
+        
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Quarto</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Ocupação</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">BOOKING</div>
+            <div class="stat-label">Principal Plataforma</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Months Section -->
+      <section class="apartments-section">
+        <div class="section-title">
+          <h3>Selecione o Mês</h3>
+          <p>Escolha o período para acessar os relatórios financeiros</p>
+        </div>
+
+        <div class="apartment-grid">
+          <!-- Junho 2025 -->
+          <div class="apartment-card" onclick="window.location.href='junho-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">JUN</div>
+              <div class="apartment-info">
+                <h4>Junho 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-junho">Online  ✅</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-junho">2.665,80</span></p>
+              <p><span class="highlight">Despesas Fixas:</span> <span id="despesas-junho">948,51</span></p>
+              <p><span class="highlight">Despesas Extras</span> <span id="despesas-junho">848,91</span></p>
+              <p><span class="highlight">Prestadores:</span> <span id="despesas-junho">550,00</span></p>
+              <p><span class="highlight">TOTAL DE DESPESAS:</span> <span id="despesas-junho">2.347,42</span></p>
+              <p><span class="highlight">Receitas - Despesas</span> <span id="despesas-junho">2.665,80 - 2.347,42 </span></p>
+
+             <p><span class="caixa-final">Caixa Finalizado em Junho:</span> <span id="resultado-junho">318,38</span></p>
+
+
+            </div>
+
+            <div class="apartment-actions">
+              <a href="junho-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+          
+          </div>
+                    <!-- =============================================== -->
+                                      <!-- JULHO 2025 -->
+                    <!-- =============================================== -->
+
+
+
+          <div class="apartment-card" onclick="window.location.href='julho-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">JUL</div>
+              <div class="apartment-info">
+                <h4>Julho 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-julho">Fechado</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Saldo Inicial:</span> <span id="inicial-julho">R$ 318,38</span></p>
+
+              <p><span class="highlight">Despesas Fixas:</span> <span id="despesas-julho">905,50</span></p>
+              <p><span class="highlight">Despesas Extras</span> <span id="despesas-julho">180,79</span></p>
+              <p><span class="highlight">Prestadores:</span> <span id="despesas-julho">739,50</span></p>
+              <p><span class="highlight">TOTAL DE DESPESAS:</span> <span id="despesas-julho">1.825,79</span></p>
+              <p><span class="highlight">TOTAL DE RECEITAS:</span> <span id="receitas-julho">2.523,63</span></p>
+
+              <p><span class="highlight">Saldo Inicial + Receitas - Despesas</span> <span id="despesas-junho">318,38 + 2.523,63 - 1.825,79 </span></p>
+
+             <p><span class="caixa-final">Caixa Finalizado em Julho:</span> <span>1.016,22</span></p>
+          
+          
+          
+            </div>
+
+            <div class="apartment-actions">
+              <a href="julho-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="203-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Agosto 2025 -->
+          <div class="apartment-card" onclick="window.location.href='agosto-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">AGO</div>
+              <div class="apartment-info">
+                <h4>Agosto 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-agosto">Fechado</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+             <p><span class="highlight">Saldo Inicial:</span> <span id="inicial-agosto">R$ 1.016,22</span></p>
+
+              <p><span class="highlight">Despesas Fixas:</span> <span id="despesas-agosto">R$ 837,42</span></p>
+              <p><span class="highlight">Despesas Extras</span> <span id="despesas-agosto">R$ 273,83</span></p>
+              <p><span class="highlight">Prestadores:</span> <span id="despesas-agosto">R$ 1028.75</span></p>
+              <p><span class="highlight">TOTAL DE DESPESAS:</span> <span id="despesas-agosto">R$ 2.140,00</span></p>
+              <p><span class="highlight">TOTAL DE RECEITAS:</span> <span id="receitas-agosto">2.334,68</span></p>
+
+              <p><span class="highlight">Saldo Inicial + Receitas - Despesas</span> <span id="despesas-agosto">R$ 1.016,22 + R$ 2.334,68 - R$2.140,00 </span></p>
+
+             <p><span class="caixa-final">Caixa Finalizado em Agosto:</span> <span id="resultado-agosto">R$ 1.210,90</span></p>
+          
+
+
+            </div>
+
+            <div class="apartment-actions">
+              <a href="agosto-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div><br><hr>
+<br>
+            <strong>PENDENCIAS SETEMBRO: </strong><br><br>
+            <strong>Receita</strong> Taysa Nayara: R$321,90<br>
+            
+            <br>
+            <strong>Adm Lucas:</strong> Calcular valor e inclui no proximo mês da adm de agosto
+          </div>
+
+          <!-- Setembro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='setembro-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">SET</div>
+              <div class="apartment-info">
+                <h4>Setembro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-setembro">A definir</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+                <p><span class="highlight">Saldo inicial em Agosto:</span> <span></span>>R$ 1.210,90</span></p>
+              <p><span class="highlight">Receitas:</span> <span>R$ 1.010,00</span></p>
+              <p><span class="highlight">Despesas Fixas:</span> <span></span>>R$ 408,65</span></p>
+              <p><span class="highlight">Despesas Extras:</span> <span></span>>R$ 12,00</span></p>
+              <p><span class="highlight">Prestacao de Servicos:</span> <span></span>>R$ 600,00</span></p>
+              <p><span class="highlight">Total de Despesas Pagas ate o momento:</span> <span></span>>R$ 1.020,65</span></p>
+              <p><span class="highlight">Saldo inicial em agosto + Receitas Recebidas - Despesas pagas:</span> <span></span>> = SALDO ATUAL NO CAIXA</span></p>
+
+
+
+
+              <p><span class="highlight">SALDO ATUAL NO CAIXA 203:</span> <span>R$ 1.200,25</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="setembro-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="203-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Outubro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='outubro-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">OUT</div>
+              <div class="apartment-info">
+                <h4>Outubro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-outubro">Previsto</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-outubro">A definir</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-outubro">A definir</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-outubro">A definir</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="outubro-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="203-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+
+          <!-- Novembro 2025 -->
+          <div class="apartment-card" onclick="window.location.href='novembro-203.html'">
+            <div class="apartment-header">
+              <div class="apartment-icon">NOV</div>
+              <div class="apartment-info">
+                <h4>Novembro 2025</h4>
+                <span class="status">
+                  <span class="status-dot"></span>
+                  <span id="status-novembro">Previsto</span>
+                </span>
+              </div>
+            </div>
+            
+            <div class="apartment-details">
+              <p><span class="highlight">Receitas:</span> <span id="receitas-novembro">A definir</span></p>
+              <p><span class="highlight">Despesas:</span> <span id="despesas-novembro">A definir</span></p>
+              <p><span class="highlight">Resultado:</span> <span id="resultado-novembro">A definir</span></p>
+            </div>
+
+            <div class="apartment-actions">
+              <a href="novembro-203.html" class="btn btn-primary" onclick="event.stopPropagation()">
+                📊 Ver Relatório
+              </a>
+            </div>
+
+            <div class="month-links">
+              <a href="203-resumo.html" class="month-link">Resumo Geral</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p><span class="highlight">RECIFE FLATS TEMPORADA LTDA</span></p>
+        <p>Sistema de Gestão Financeira - Apartamento 203</p>
+        <p>Última atualização: Setembro 2025</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Dados extraídos dos seus arquivos reais - APARTAMENTO 203
+    const dadosReais = {
+      julho: {
+        receitas: [
+          // Dados de julho (valores do resumo)
+          { valor: 2523.63, descricao: 'Total receitas julho' }
+        ],
+        despesas: [
+          // Dados de julho (valores do resumo)
+          { valor: 1825.79, categoria: 'Total' }
+        ]
+      },
+      agosto: {
+        receitas: [
+          { valor: 121.10, descricao: 'BOOKING - Josy Silva' },
+          { valor: 121.10, descricao: 'BOOKING - Leonardo Cavalcanti' },
+          { valor: 117.45, descricao: 'BOOKING - Luana Fernandes' },
+          { valor: 280.00, descricao: 'BOOKING - Joelmir Pereira' },
+          { valor: 234.01, descricao: 'BOOKING - Diego Melo (Romulo)' },
+          { valor: 370.00, descricao: 'BOOKING - Joelmir Pereira' },
+          { valor: 351.02, descricao: 'BOOKING - Ana Valesca' },
+          { valor: 370.00, descricao: 'BOOKING - Joelmir Pereira' },
+          { valor: 370.00, descricao: 'BOOKING - Joelmir Pereira' },
+          { valor: 321.90, descricao: 'BOOKING - Taysa Nayara (Pendente)' }
+        ],
+        despesas: [
+          // Fixas
+          { valor: 408.65, categoria: 'Fixa' }, // Condomínio
+          { valor: 242.17, categoria: 'Fixa' }, // Energia
+          { valor: 45.30, categoria: 'Fixa' },  // Internet
+          { valor: 75.00, categoria: 'Fixa' },  // IPTU
+          { valor: 50.00, categoria: 'Fixa' },  // WhatsApp Business
+          { valor: 25.00, categoria: 'Fixa' },  // Zapier
+          { valor: 66.30, categoria: 'Fixa' },  // CIM
+          // Extras
+          { valor: 32.03, categoria: 'Extra' }, // Mercadinho
+          { valor: 5.50, categoria: 'Extra' },  // Uber Lucas
+          { valor: 30.40, categoria: 'Extra' }, // Mercadinho 2
+          { valor: 60.00, categoria: 'Extra' }, // Fogão parcela
+          { valor: 60.00, categoria: 'Extra' }, // Jogo de cama
+          { valor: 85.90, categoria: 'Extra' }, // Cadeado cofre
+          // Prestadores
+          { valor: 100.00, categoria: 'Prestador' }, // Adm Gabriela
+          { valor: 297.03, categoria: 'Prestador' }, // Limpeza
+          { valor: 27.97, categoria: 'Prestador' },  // Vale Ramon
+          { valor: 58.75, categoria: 'Prestador' },  // Contabilidade
+          { valor: 25.00, categoria: 'Prestador' },  // Omie
+          { valor: 100.00, categoria: 'Prestador' }, // Faxina Lucas (08/08)
+          { valor: 100.00, categoria: 'Prestador' }, // Faxina Lucas (11/08)
+          { valor: 100.00, categoria: 'Prestador' }, // Faxina Ramon (15/08)
+          { valor: 100.00, categoria: 'Prestador' }, // Faxina Ramon (18/08)
+          { valor: 120.00, categoria: 'Prestador' }  // Faxina Barbara (22/08)
+        ]
+      }
+    };
+
+    function calcularTotais(mes) {
+      const dados = dadosReais[mes];
+      if (!dados) return { receitas: 0, despesas: 0, resultado: 0 };
+
+      const totalReceitas = dados.receitas.reduce((sum, item) => sum + item.valor, 0);
+      const totalDespesas = dados.despesas.reduce((sum, item) => sum + item.valor, 0);
+      const resultado = totalReceitas - totalDespesas;
+
+      return {
+        receitas: totalReceitas,
+        despesas: totalDespesas,
+        resultado: resultado
+      };
+    }
+
+    function formatarMoeda(valor) {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(valor);
+    }
+
+    function atualizarCards() {
+      // Julho (dados do resumo anterior)
+      const julhoTotais = calcularTotais('julho');
+      document.getElementById('receitas-julho').textContent = formatarMoeda(julhoTotais.receitas);
+      document.getElementById('despesas-julho').textContent = formatarMoeda(julhoTotais.despesas);
+      document.getElementById('resultado-julho').textContent = formatarMoeda(julhoTotais.resultado);
+
+      // Agosto (dados detalhados)
+      const agostoTotais = calcularTotais('agosto');
+      document.getElementById('receitas-agosto').textContent = formatarMoeda(agostoTotais.receitas);
+      document.getElementById('despesas-agosto').textContent = formatarMoeda(agostoTotais.despesas);
+      document.getElementById('resultado-agosto').textContent = formatarMoeda(agostoTotais.resultado);
+
+      // Colorir resultados
+      const resultadoJulho = document.getElementById('resultado-julho');
+      const resultadoAgosto = document.getElementById('resultado-agosto');
+      
+      if (julhoTotais.resultado > 0) {
+        resultadoJulho.style.color = 'var(--success)';
+      } else {
+        resultadoJulho.style.color = 'var(--danger)';
+      }
+
+      if (agostoTotais.resultado > 0) {
+        resultadoAgosto.style.color = 'var(--success)';
+      } else {
+        resultadoAgosto.style.color = 'var(--danger)';
+      }
+    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', atualizarCards);
+  </script>
+</body>
+</html>
