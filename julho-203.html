@@ -317,17 +317,17 @@
 <header>
   <h1>Relatório Financeiro - Apartamento 203</h1>
   <h2>Julho 2025</h2>
-  <p>Edifício Golden Ville · Atualizado em 03/09/2025</p>
+  <p>IPE 203 · Atualizado em 03/09/2025</p>
 </header>
 
-<!-- RESUMO MÊS ANTERIOR COM VALORES CORRETOS -->
+<!-- RESUMO MÊS ANTERIOR -->
 <div class="resumo-anterior">
   <h3>📋 Resumo do Mês Anterior (Junho 2025)</h3>
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
     <div><strong>Receitas Junho:</strong> R$ 2.665,80</div>
     <div><strong>Despesas Junho:</strong> R$ 2.347,42</div>
-    <div><strong>Saldo Final Junho:</strong> R$ 318,38</div>
-    <div style="color: #28a745;"><strong>Saldo inicial para Julho</strong></div>
+    <div><strong>Saldo Junho:</strong> R$ 321,98</div>
+    <div style="color: #c62828;"><strong>ATUALIZADO</strong> VANESSA RAFAELLA 10/09/2025</div>
   </div>
 </div>
 
@@ -387,8 +387,9 @@
     { data: '30/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Devolução 100 reais Gabi', categoria: 'Prestador', status: 'PAGO' },
 ];
 
-// Valor correto do saldo final de junho baseado nos dados reais
-const saldoFinalJunho = 318.38;
+// Dados do mês anterior (Junho)
+const saldoAnterior = 321.98;
+const pendenciaAnterior = 316.80; // Joelmir Pereira de junho
 
 function gerarTabela(lista, titulo) {
   if (lista.length === 0) return `<p>Nenhum registro</p>`;
@@ -480,47 +481,46 @@ function gerarTabela(lista, titulo) {
     const totalExtras = extras.reduce((s, d) => s + d.valor, 0);
     const totalPrestadores = prestadores.reduce((s, d) => s + d.valor, 0);
     
-    // Cálculo correto: Saldo inicial + Receitas - Despesas
+    // Cálculo considerando mês anterior
+    const totalReceitasAcumulado = totalReceitasJulho + pendenciaAnterior; // Inclui o que estava pendente de junho
+    const saldoInicialJulho = saldoAnterior;
     const totalDespesasJulho = totalFixas + totalExtras + totalPrestadores;
-    const caixaFinalJulho = saldoFinalJunho + totalReceitasJulho - totalDespesasJulho;
+    const caixaFinalJulho = saldoInicialJulho + totalReceitasAcumulado - totalDespesasJulho;
 
     document.getElementById('receitas').innerHTML = gerarTabela(receitas, 'Receitas - Julho 2025');
     document.getElementById('fixas').innerHTML = gerarTabela(fixas, 'Despesas Fixas');
     document.getElementById('extras').innerHTML = gerarTabela(extras, 'Despesas Extras');
     document.getElementById('prestadores').innerHTML = gerarTabela(prestadores, 'Prestadores de Serviço');
 
+    // Contar valores ainda aguardando pagamento
+    const receitasAguardando = receitas.filter(r => r.status.includes('Aguardando'));
+    const totalAguardando = receitasAguardando.reduce((s, d) => s + d.valor, 0);
+    const pendenciaFogao = 60.00; // Fogão pendente
+
     document.getElementById('resumo').innerHTML = `
      <hr><br>
     <h2>Resumo do Caixa - Julho 2025</h2><br>
-      
       <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <h4 style="color: #1976d2;">💰 Continuidade de Junho:</h4>
-        <p><strong>Saldo Final de Junho:</strong> R$ 318,38</p>
+        <h4 style="color: #1976d2;">Continuidade de Junho:</h4>
+        <p><strong>Saldo Inicial (Junho):</strong> R$ ${saldoAnterior.toFixed(2)}</p>
+        <p><strong>Pendência Recebida (Joelmir):</strong> R$ ${pendenciaAnterior.toFixed(2)}</p>
       </div>
       
-      <h4>📊 Movimentação de Julho:</h4>
-      <p><strong>➕ Receitas Julho:</strong> R$ ${totalReceitasJulho.toFixed(2)}</p>
-      <p><strong>➖ Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
-      <p><strong>➖ Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
-      <p><strong>➖ Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
+      <h4>Movimentação de Julho:</h4>
+      <p><strong>Receitas Julho:</strong> R$ ${totalReceitasJulho.toFixed(2)}</p>
+      <p><strong>Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
+      <p><strong>Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
+      <p><strong>Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
       <p><strong>Total Despesas Julho:</strong> R$ ${totalDespesasJulho.toFixed(2)}</p>
       
       <hr><br>
-      
-      <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border: 2px solid #28a745;">
-        <h3 style="color: #28a745; margin: 0;">💰 CÁLCULO FINAL:</h3>
-        <p style="font-size: 1.1em; margin: 10px 0;">
-          <strong>R$ 318,38</strong> (saldo junho) + 
-          <strong>R$ ${totalReceitasJulho.toFixed(2)}</strong> (receitas julho) - 
-          <strong>R$ ${totalDespesasJulho.toFixed(2)}</strong> (despesas julho)
-        </p>
-        <hr style="border: 1px solid #28a745;">
-        <h2 style="color: #28a745; margin: 10px 0;">🎯 CAIXA FINAL JULHO: R$ ${caixaFinalJulho.toFixed(2)}</h2>
-      </div>
-      
+      <h3 style="color: #28a745;">💰 CAIXA FINAL JULHO: R$ 697.84 </h3>
+       <h3 style="color: #28a745;">💰 CAIXA FINAL JULHO + Saldo inicial 321.98 </h3>
+        <h3 style="color: #28a745;">💰 Saldo em caixa R$1.019,82 </h3>
       <br>
       <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
-        <p style="margin: 0; color: #856404;"><strong>📝 Este saldo será usado como base para o cálculo de Agosto 2025</strong></p>
+        <h4 style="color: #856404;">🚨 Pendências para Agosto:</h4>
+        <p style="color: #c62828;"><strong>Receitas Aguardando Pagamento:<br></strong> ADM LUCAS 15%<br> 15% de 697,84 = 104,70</p>
       </div>
     `;
   }
@@ -534,6 +534,8 @@ function gerarTabela(lista, titulo) {
 
   atualizarAbas();
 </script>
-
+<hr>
+<footer style="text-align: center; color: #088092; font-size: 0.9rem; margin-top: 20px;">
+  <p>Atualizado e conferido por Vanessa Rafaella em 23/09/2025</p>
 </body>
 </html>
