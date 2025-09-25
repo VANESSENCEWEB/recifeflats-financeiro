@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden View 1006 - Setembro 2025</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin: 2rem 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .page-header h1 { font-size: 2.5rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .page-header h2 { color: #f59e0b; font-size: 1.8rem; margin-bottom: 0.5rem; }
+
+    /* Previous month summary */
+    .resumo-anterior {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+    }
+
+    .resumo-anterior h3 {
+      color: #166534;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resumo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .resumo-item {
+      background: rgba(255,255,255,0.8);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .resumo-item strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .resumo-valor {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #166534;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .tabs button {
+      background: transparent;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: fit-content;
+    }
+    
+    .tabs button.active,
+    .tabs button:hover {
+      background: #f59e0b;
+      color: white;
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Tables */
+    .table-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    
+    .table-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 1.25rem 1.5rem;
+    }
+    
+    .table-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #374151;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    
+    tr:hover {
+      background: #f8fafc;
+    }
+    
+    /* Platform badges */
+    .plataforma-booking {
+      background: linear-gradient(135deg, #003580, #0057b8);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .plataforma-airbnb {
+      background: linear-gradient(135deg, #FF5A5F, #ff787d);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .plataforma-direta {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .plataforma-plataforma {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    /* Status */
+    .status-recebido { color: #22c55e; font-weight: 700; }
+    .status-aguardando { color: #ef4444; font-weight: 700; }
+    .pendente { color: #ef4444; font-weight: 700; }
+    .receita { color: #22c55e; font-weight: 700; }
+    .despesa { color: #ef4444; font-weight: 700; }
+    
+    .sem-recibo {
+      color: #9ca3af;
+      font-style: italic;
+      font-size: 0.7rem;
+    }
+
+    /* Summary section */
+    .summary-section {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+
+    .final-balance {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .final-balance h3 {
+      color: #166534;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .final-balance h2 {
+      color: #166534;
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      .tabs { flex-direction: column; }
+      .tabs button { width: 100%; }
+      .resumo-grid { grid-template-columns: 1fr; }
+      table { min-width: 500px; font-size: 0.8rem; }
+      th, td { padding: 0.5rem 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="navbar-brand">🏢 Golden View 1006</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <header class="page-header">
+        <h1>Relatório Financeiro</h1>
+        <h2>Golden View 1006 - Setembro 2025</h2>
+        <p>Edifício Golden View • Atualizado em 30/09/2025</p>
+      </header>
+
+      <section class="resumo-anterior">
+        <h3>📋 Resumo do Mês Anterior (Agosto 2025)</h3>
+        <div class="resumo-grid">
+          <div class="resumo-item">
+            <strong>Saldo Final Agosto</strong>
+            <div class="resumo-valor">R$ 1.718,00</div>
+          </div>
+          <div class="resumo-item">
+            <strong>Receitas de Setembro</strong>
+            <div class="resumo-valor">R$ 200.00</div>
+          </div>
+          <div class="resumo-item">
+            <strong>14 diárias hospedadas</strong>
+            <div class="resumo-valor">4 reservas</div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs">
+        <button onclick="showTab('receitas')" class="active">Receitas</button>
+        <button onclick="showTab('fixas')">Despesas Fixas</button>
+        <button onclick="showTab('extras')">Despesas Extras</button>
+        <button onclick="showTab('prestadores')">Prestadores</button>
+        <button onclick="showTab('resumo')">Resumo</button>
+      </nav>
+
+      <div id="receitas" class="tab-content active">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Receitas - Setembro 2025</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data Pgto</th>
+                  <th>Check-in</th>
+                  <th>Check-out</th>
+                  <th>Diárias</th>
+                  <th>Hóspede</th>
+                  <th>Valor</th>
+                  <th>Plataforma</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>03/09/2025</td>
+                  <td>04/09/2025</td>
+                  <td>05/09/2025</td>
+                  <td>1</td>
+                  <td>Aline Camera</td>
+                  <td class="receita">R$ 200,00</td>
+                  <td><span class="plataforma-direta">RESERVA DIRETA</span></td>
+                  <td class="status-recebido">Recebido ✅</td>
+                </tr>
+                <tr>
+                  <td>10/10/2025</td>
+                  <td>05/09/2025</td>
+                  <td>08/09/2025</td>
+                  <td>3</td>
+                  <td>Yasmin Bezerra</td>
+                  <td class="receita">R$ 503,00</td>
+                  <td><span class="plataforma-plataforma">PLATAFORMA</span></td>
+                  <td class="status-aguardando">Aguardando Pagamento ⏳</td>
+                </tr>
+                <tr>
+                  <td>10/10/2025</td>
+                  <td>10/09/2025</td>
+                  <td>16/09/2025</td>
+                  <td>6</td>
+                  <td>Anna Rodrigues</td>
+                  <td class="receita">R$ 804,00</td>
+                  <td><span class="plataforma-plataforma">PLATAFORMA</span></td>
+                  <td class="status-aguardando">Aguardando Pagamento ⏳</td>
+                </tr>
+                <tr>
+                  <td>10/10/2025</td>
+                  <td>16/09/2025</td>
+                  <td>20/09/2025</td>
+                  <td>4</td>
+                  <td>Jefferson Zanotti</td>
+                  <td class="receita">R$ 575,08</td>
+                  <td><span class="plataforma-plataforma">PLATAFORMA</span></td>
+                  <td class="status-aguardando">Aguardando Pagamento ⏳</td>
+                </tr>
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td colspan="5"><strong>Total Receitas</strong></td>
+                  <td><strong>R$ 2.082,08</strong></td>
+                  <td colspan="2"><strong>14 diárias</strong></td>
+                </tr>
+                <tr style="font-weight: 700; background: #dcfce7;">
+                  <td colspan="5"><strong>✅ Já Recebido</strong></td>
+                  <td><strong style="color: #22c55e;">R$ 200,00</strong></td>
+                  <td colspan="2"><strong>1 reserva</strong></td>
+                </tr>
+                <tr style="font-weight: 700; background: #fef3c7;">
+                  <td colspan="5"><strong>⏳ Aguardando Out/25</strong></td>
+                  <td><strong style="color: #f59e0b;">R$ 1.882,08</strong></td>
+                  <td colspan="2"><strong>3 reservas</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="fixas" class="tab-content">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Despesas Fixas - Setembro 2025</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Valor</th>
+                  <th>Descrição</th>
+                  <th>Status</th>
+                  <th>Recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">R$ 399,29</td>
+                  <td>Condomínio</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>15/09/2025</td>
+                  <td class="despesa">A definir</td>
+                  <td>Energia</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>17/09/2025</td>
+                  <td class="despesa">A definir</td>
+                  <td>Internet</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">R$ 87,57</td>
+                  <td>IPTU</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">R$ 50,00</td>
+                  <td>WhatsApp Business</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td><strong>Total Pago</strong></td>
+                  <td><strong>R$ 486,86</strong></td>
+                  <td colspan="3"><strong>2 itens a definir</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="extras" class="tab-content">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Despesas Extras - Setembro 2025</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Valor</th>
+                  <th>Descrição</th>
+                  <th>Status</th>
+                  <th>Recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>03/09/2025</td>
+                  <td class="despesa">R$ 27,76</td>
+                  <td>Lavanderia</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>03/09/2025</td>
+                  <td class="despesa">R$ 7,00</td>
+                  <td>2 água oxigenada</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>03/09/2025</td>
+                  <td class="despesa">R$ 21,40</td>
+                  <td>Mercado</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>05/09/2025</td>
+                  <td class="despesa">R$ 180,00</td>
+                  <td>Adelson maçaneta</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>05/09/2025</td>
+                  <td class="despesa">R$ 150,00</td>
+                  <td>Isaias eletricista</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>12/09/2025</td>
+                  <td class="despesa">R$ 40,00</td>
+                  <td>Beto porta</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                       <tr>
+                  <td>05/09/2025</td>
+                  <td class="despesa">60.00</td>
+                  <td>Macaneta</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                   <tr>
+                  <td>05/09/2025</td>
+                  <td class="despesa">379.48</td>
+                  <td>TV parcela 4 de 6 + Microondas parcela 4 de 5 </td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                  <td>16/09/2025</td>
+                  <td class="despesa">R$ 12,50</td>
+                  <td>Uber Lucas</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td><strong>Total</strong></td>
+                  <td><strong>R$ 438,66</strong></td>
+                  <td colspan="3"><strong>Pendentes: R$ 7,00</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="prestadores" class="tab-content">
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Prestadores de Serviço - Setembro 2025</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Valor</th>
+                  <th>Descrição</th>
+                  <th>Status</th>
+                  <th>Recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">R$ 100,00</td>
+                  <td>Adm Gabriela</td>
+                  <td>PAGO ✅</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa"></td>
+                  <td>Lucas - A DEFINIR</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>15/09/2025</td>
+                  <td class="despesa">480.00</td>
+                  <td>4 Faxinas Barbara: 03/09, 05/09, 08/09, 16/09</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">98.75</td>
+                  <td>Contabilidade SETEMBRO</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+               
+                <tr>
+                  <td>10/09/2025</td>
+                  <td class="despesa">R$ 25,00</td>
+                  <td>Omie</td>
+                  <td class="pendente">PENDENTE ⚠️</td>
+                  <td><span class="sem-recibo">Sem recibo</span></td>
+                </tr>
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td><strong>Total Pago</strong></td>
+                  <td><strong>R$ 125,00</strong></td>
+                  <td colspan="3"><strong>3 itens a definir</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="resumo" class="tab-content">
+        <div class="summary-section">
+          <div class="table-header">
+            <h2>Resumo do Caixa - Setembro 2025</h2>
+          </div>
+          
+          <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border-left: 4px solid #22c55e;">
+            <h4 style="color: #166534; margin-bottom: 1rem;">💰 Movimentação Financeira:</h4>
+            <p style="margin-bottom: 0.5rem;"><strong>Saldo inicial (Agosto):</strong> R$ 1.718,00</p>
+            <p style="margin-bottom: 0.5rem;"><strong>Receitas recebidas:</strong> <span style="color: #22c55e; font-weight: 700;">R$ 200,00</span></p>
+            <p style="margin-bottom: 0.5rem;"><strong>Despesas pagas:</strong> <span style="color: #ef4444; font-weight: 700;">R$ 1.498,52</span></p>
+          </div>
+          
+          <div class="final-balance">
+            <h3>💰 SALDO ATUAL NO CAIXA:</h3>
+            <p style="margin: 1rem 0; color: #374151;">
+              R$ 1.718,00 + R$ 200,00 - R$ 1.498,52
+            </p>
+            <h2>R$ 420.00</h2>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #f59e0b; border-left: 4px solid #f59e0b; border-radius: 12px; padding: 1.5rem; margin: 2rem 0;">
+            <h4 style="color: #92400e; margin-bottom: 1rem;">📋 Receitas Pendentes (Outubro 2025):</h4>
+            <ul style="margin-left: 1rem;">
+              <li><strong>Yasmin Bezerra:</strong> R$ 503,00 - 3 diárias</li>
+              <li><strong>Anna Rodrigues:</strong> R$ 804,00 - 6 diárias</li>
+              <li><strong>Jefferson Zanotti:</strong> R$ 575,08 - 4 diárias</li>
+            </ul>
+            <p style="margin-top: 1rem; font-weight: 700; color: #92400e;">
+              <strong>Total a Receber:</strong> R$ 1.882,08
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function showTab(tabName) {
+      // Esconder todas as abas
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Remover active de todos os botões
+      const buttons = document.querySelectorAll('.tabs button');
+      buttons.forEach(button => {
+        button.classList.remove('active');
+      });
+      
+      // Mostrar a aba selecionada
+      const selectedTab = document.getElementById(tabName);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
+      }
+      
+      // Ativar o botão correspondente
+      const selectedButton = document.querySelector(`button[onclick="showTab('${tabName}')"]`);
+      if (selectedButton) {
+        selectedButton.classList.add('active');
+      }
+    }
+
+    // Inicializar com a primeira aba ativa
+    document.addEventListener('DOMContentLoaded', function() {
+      showTab('receitas');
+    });
+  </script>
+</body>
+</html>
