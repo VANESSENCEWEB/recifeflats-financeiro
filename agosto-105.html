@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório Financeiro - Ap. 105</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #0f172a;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tabs button {
+      background: #0ea5e9;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tabs button:hover,
+    .tabs button.active {
+      background: #0369a1;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th { background: #e2e8f0; }
+    tr:hover { background: #f1f5f9; }
+
+    .receita { color: green; font-weight: bold; }
+    .despesa { color: red; font-weight: bold; }
+
+    .plataforma-booking {
+      background: #003580;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .plataforma-airbnb {
+      background: #FF5A5F;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .plataforma-direta {
+      background: #28a745;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-block;
+    }
+
+    .status-recebido {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .status-aguardando {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .status-concluido {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .resumo-anterior {
+      background: #e8f5e8;
+      border: 2px solid #28a745;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .resumo-anterior h3 {
+      color: #28a745;
+      margin-top: 0;
+    }
+
+    .pendente {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .navbar {
+      background: #002c7e;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+      color: #ffd700;
+    }
+
+    .navbar-brand .icon {
+      font-size: 1.8rem;
+      margin-right: 10px;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .dropdown-toggle:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      margin-top: 10px;
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 12px 20px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-item:hover {
+      background: #076bcf;
+      color: #eeeff4;
+      padding-left: 25px;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .dropdown-item:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+
+    .dropdown-header {
+      padding: 10px 20px 5px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #f3f3f6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #f0f0f0;
+      background-color: #0ea5e9;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-brand">
+        <span class="icon">🏠</span>
+        <span>Fechamento de Caixa</span>
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-dropdown">
+          <a href="#" class="dropdown-toggle">
+            🏢 Apartamentos <span>▼</span>
+          </a>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">Apto 105 - Principal</div>
+            <a href="junho-105.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-105.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-105.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-105.html" class="dropdown-item">📉 Setembro 2025</a>
+            <div class="dropdown-header">Apto 203 - Intermediário</div>
+            <a href="junho-203.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-203.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-203.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-203.html" class="dropdown-item">📉 Setembro 2025</a>
+            <div class="dropdown-header">Apto 1006 - Golden View</div>
+            <a href="junho-1006.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-1006.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-1006.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-1006.html" class="dropdown-item">📉 Setembro 2025</a>
+            <div class="dropdown-header">Apto 804 - Premium</div>
+            <a href="junho-804.html" class="dropdown-item">📊 Junho 2025</a>
+            <a href="julho-804.html" class="dropdown-item">📈 Julho 2025</a>
+            <a href="agosto-804.html" class="dropdown-item">📉 Agosto 2025</a>
+            <a href="setembro-804.html" class="dropdown-item">📉 Setembro 2025</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <br><hr>
+
+  <header>
+    <h1>Relatório Financeiro - Apartamento 105</h1>
+    <h2>Agosto 2025</h2>
+    <p>Edifício Golden Ville · Atualizado em 10/09/2025</p>
+  </header>
+
+  <div class="resumo-anterior">
+    <h3>📋 Resumo do Mês Anterior (Julho 2025)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+      <div><strong>Saldo Final Julho:</strong> R$ 1.921,15</div>
+      <div><strong>Receitas Julho:</strong> R$ 2.880,15</div>
+      <div><strong>Despesas Julho:</strong> R$ 2.010,30</div>
+      <div style="color: #28a745;"><strong>Saldo inicial para Agosto: R$ 1.921,15</strong></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button onclick="mostrarAba('receitas')" class="active">Receitas</button>
+    <button onclick="mostrarAba('fixas')">Despesas Fixas</button>
+    <button onclick="mostrarAba('extras')">Despesas Extras</button>
+    <button onclick="mostrarAba('prestadores')">Prestadores</button>
+    <button onclick="mostrarAba('resumo')">Resumo Caixa</button>
+  </div>
+
+  <div id="receitas" class="tab-content active"></div>
+  <div id="fixas" class="tab-content"></div>
+  <div id="extras" class="tab-content"></div>
+  <div id="prestadores" class="tab-content"></div>
+  <div id="resumo" class="tab-content"></div>
+
+  <footer style="text-align: left; color: #088092; font-size: 1.0rem; margin-top: 20px;">
+    <a href="index.html" style="text-decoration: none; color: #212ad5;">🏠 Voltar para a Página Inicial</a>
+  </footer>
+
+<script>
+// Dados do mês - Agosto 2025
+const dados = [
+  // RECEITAS - Todas recebidas em 10/09/2025
+  { data: '04/07/2025', tipo: 'Receita', valor: 1573.70, plataforma: 'BOOKING.COM', hospede: 'Aldenir Rodrigues', status: 'Recebido ✅', codigo: '608194631', periodo: '01-12/08' },
+  { data: '01/08/2025', tipo: 'Receita', valor: 155.00, plataforma: 'BOOKING.COM', hospede: 'Leticia Teixeira', status: 'Recebido ✅', codigo: '571399597', periodo: '14-15/08' },
+  { data: '06/07/2025', tipo: 'Receita', valor: 313.32, plataforma: 'BOOKING.COM', hospede: 'Jonathas Patricio', status: 'Recebido ✅', codigo: '623741450', periodo: '15-17/08' },
+  { data: '17/07/2025', tipo: 'Receita', valor: 285.60, plataforma: 'BOOKING.COM', hospede: 'Fabio Silva', status: 'Recebido ✅', codigo: '512129790', periodo: '20-22/08' },
+  { data: '22/07/2025', tipo: 'Receita', valor: 218.40, plataforma: 'BOOKING.COM', hospede: 'Daniel Silva', status: 'Recebido ✅', codigo: '536195141', periodo: '22-24/08' },
+  { data: '04/07/2025', tipo: 'Receita', valor: 348.18, plataforma: 'BOOKING.COM', hospede: 'Marlon Freitas', status: 'Recebido ✅', codigo: '518919519', periodo: '24-27/08' },
+  { data: '26/07/2025', tipo: 'Receita', valor: 403.20, plataforma: 'BOOKING.COM', hospede: 'Liliane Leal', status: 'Recebido ✅', codigo: '553918598', periodo: '27-31/08' },
+  
+  // CAUÇÃO RECEBIDA
+  { data: '07/07/2025', tipo: 'Receita', valor: 45.90, plataforma: 'PIX CAUÇÃO', hospede: 'Marlon Freitas', status: 'Recebido ✅' },
+
+  // DESPESAS FIXAS
+  { data: '10/08/2025', tipo: 'Despesa', valor: 469.82, descricao: 'Condomínio', categoria: 'Fixa', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 488.25, descricao: 'Energia', categoria: 'Fixa', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 45.30, descricao: 'Internet', categoria: 'Fixa', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 87.57, descricao: 'IPTU', categoria: 'Fixa', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business (Umbler Talk)', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automações', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 66.30, descricao: 'CIM', categoria: 'Fixa', status: 'PAGO ✅' },
+
+  // DESPESAS EXTRAS
+  { data: '10/08/2025', tipo: 'Despesa', valor: 68.48, descricao: 'Mercadinho', categoria: 'Extra', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 7.00, descricao: 'Água mineral', categoria: 'Extra', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 30.40, descricao: 'Mercadinho 02', categoria: 'Extra', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão parcela 02 de 10', categoria: 'Extra', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 85.90, descricao: 'Cadeado cofre', categoria: 'Extra', status: 'PAGO ✅' },
+
+  // PRESTADORES
+  { data: '10/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 0.00, descricao: 'Adm Lucas (15% receitas)', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '12/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Bárbara', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '18/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '22/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+  { data: '24/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '27/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '31/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' }
+];
+
+// Saldo inicial - saldo final de julho
+const saldoInicialAgosto = 1921.15;
+
+function gerarTabela(lista, titulo) {
+  if (lista.length === 0) return '<p>Nenhum registro encontrado</p>';
+
+  const isReceitas = lista.some(item => item.tipo === 'Receita');
+  
+  let linhas = lista.map(item => {
+    if (item.tipo === 'Receita') {
+      let plataformaClass = '';
+      if (item.plataforma === 'BOOKING.COM') plataformaClass = 'plataforma-booking';
+      else if (item.plataforma === 'AIRBNB') plataformaClass = 'plataforma-airbnb';
+      else if (item.plataforma === 'PIX CAUÇÃO') plataformaClass = 'plataforma-direta';
+      else plataformaClass = 'plataforma-direta';
+
+      const statusClass = item.status && item.status.includes('Aguardando') ? 'status-aguardando' : 'status-concluido';
+      
+      return `
+        <tr>
+          <td>${item.data}</td>
+          <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
+          <td>R$ ${item.valor.toFixed(2)}</td>
+          <td><span class="${plataformaClass}">${item.plataforma}</span></td>
+          <td>${item.hospede}${item.codigo ? ` (${item.codigo})` : ''}${item.periodo ? ` - ${item.periodo}` : ''}</td>
+          <td class="${statusClass}">${item.status}</td>
+        </tr>
+      `;
+    } else {
+      const statusClass = item.status && item.status.includes('PENDENTE') ? 'pendente' : '';
+      return `
+        <tr>
+          <td>${item.data}</td>
+          <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
+          <td>R$ ${item.valor.toFixed(2)}</td>
+          <td colspan="2">${item.descricao}</td>
+          <td class="${statusClass}">${item.status || ''}</td>
+        </tr>
+      `;
+    }
+  }).join('');
+
+  const total = lista.reduce((s, d) => s + d.valor, 0);
+
+  const cabecalho = isReceitas ? 
+    `<tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th>Plataforma</th>
+      <th>Hóspede</th>
+      <th>Status</th>
+    </tr>` :
+    `<tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      <th colspan="2">Descrição</th>
+      <th>Status</th>
+    </tr>`;
+
+  const totalCols = isReceitas ? 4 : 3;
+
+  return `
+    <h2>${titulo}</h2>
+    <table>
+      <thead>
+        ${cabecalho}
+      </thead>
+      <tbody>
+        ${linhas}
+        <tr style="font-weight:bold; background:#f1f5f9;">
+          <td colspan="${totalCols}">Total</td>
+          <td>R$ ${total.toFixed(2)}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+}
+
+function atualizarAbas() {
+  // Filtrar dados por categoria
+  const receitas = dados.filter(d => d.tipo === 'Receita');
+  const fixas = dados.filter(d => d.categoria === 'Fixa');
+  const extras = dados.filter(d => d.categoria === 'Extra');
+  const prestadores = dados.filter(d => d.categoria === 'Prestador');
+
+  // Calcular totais
+  const receitasRecebidas = receitas.filter(r => r.status.includes('Recebido'));
+  const receitasPendentes = receitas.filter(r => r.status.includes('Aguardando'));
+  
+  const totalReceitasRecebidas = receitasRecebidas.reduce((s, d) => s + d.valor, 0);
+  const totalReceitasPendentes = receitasPendentes.reduce((s, d) => s + d.valor, 0);
+  const totalReceitasAgosto = receitas.reduce((s, d) => s + d.valor, 0);
+  
+  const despesasFixasPagas = fixas.filter(f => f.status.includes('PAGO'));
+  const despesasFixasPendentes = fixas.filter(f => f.status.includes('PENDENTE'));
+  const totalFixasPagas = despesasFixasPagas.reduce((s, d) => s + d.valor, 0);
+  const totalFixasPendentes = despesasFixasPendentes.reduce((s, d) => s + d.valor, 0);
+  const totalFixas = fixas.reduce((s, d) => s + d.valor, 0);
+  
+  const despesasExtrasPagas = extras.filter(e => e.status.includes('PAGO'));
+  const despesasExtrasPendentes = extras.filter(e => e.status.includes('PENDENTE'));
+  const totalExtrasPagas = despesasExtrasPagas.reduce((s, d) => s + d.valor, 0);
+  const totalExtrasPendentes = despesasExtrasPendentes.reduce((s, d) => s + d.valor, 0);
+  const totalExtras = extras.reduce((s, d) => s + d.valor, 0);
+  
+  const prestadoresPagos = prestadores.filter(p => p.status.includes('PAGO') && p.valor > 0);
+  const prestadoresPendentes = prestadores.filter(p => p.status.includes('PENDENTE') && p.valor > 0);
+  const totalPrestadoresPagos = prestadoresPagos.reduce((s, d) => s + d.valor, 0);
+  const totalPrestadoresPendentes = prestadoresPendentes.reduce((s, d) => s + d.valor, 0);
+  const totalPrestadores = prestadores.filter(p => p.valor > 0).reduce((s, d) => s + d.valor, 0);
+  
+  // Cálculo final
+  const totalDespesasPagasAgosto = totalFixasPagas + totalExtrasPagas + totalPrestadoresPagos;
+  const totalDespesasPendentesAgosto = totalFixasPendentes + totalExtrasPendentes + totalPrestadoresPendentes;
+  const saldoFinalAgosto = saldoInicialAgosto + totalReceitasRecebidas - totalDespesasPagasAgosto;
+
+  // Gerar tabelas
+  document.getElementById('receitas').innerHTML = gerarTabela(receitas, 'Receitas - Agosto 2025');
+  document.getElementById('fixas').innerHTML = gerarTabela(fixas, 'Despesas Fixas');
+  document.getElementById('extras').innerHTML = gerarTabela(extras, 'Despesas Extras');
+  document.getElementById('prestadores').innerHTML = gerarTabela(prestadores, 'Prestadores de Serviço');
+
+  // Gerar resumo
+  document.getElementById('resumo').innerHTML = `
+    <hr><br>
+    <h2>Resumo do Caixa - Agosto 2025<br><br> -----------------------------------<br><strong>Saldo Final em Caixa: R$ 3.316,00</strong></h2><br>
+    
+   
+    
+    <hr><br>
+    
+   
+   <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border: 2px solid #28a745; margin-bottom: 1.5rem;">
+  <h3 style="color: #28a745; margin: 0;">💰 CÁLCULO FINAL:</h3>
+  <p style="font-size: 1.05em; margin: 10px 0; line-height: 1.6; color: #155724;">
+    <strong>Receita Recebida:</strong> R$ 3.343,30<br>
+    <strong>Despesas Fixas :</strong> R$ 1.232,24<br>
+    <strong>Despesas Extras:</strong> R$ 251,78<br>
+    <strong>Prestação de Serviço:</strong> R$ 843,75<br>
+    <strong>Total de Despesas:</strong> <span style="color:#c82333;">R$ 2.326,00</span><br>
+    <strong>Lucro Bruto:</strong> R$ 1.017,00<br>
+    <strong>Gestão de Lucros (15%):</strong> R$ 152,55
+  </p>
+  <hr style="border: 1px solid #28a745;">
+
+</div>
+
+<div style="background: #d1ecf1; padding: 20px; border-radius: 8px; border-left: 6px solid #17a2b8; margin-bottom: 1.5rem;">
+  <h4 style="color: #0c5460; margin-top: 0;">📈 Saldo inicial: R$ 2.065,00</h4>
+  <p style="color: #0c5460; line-height: 1.6;">
+    <strong>Receitas Recebidas em Agosto</strong> R$ 3.343,30<br>
+    <strong>Total: </strong> R$ 5.408.00<br>
+    <strong>Despesas Fixas Paga:</strong> - R$ 1.157,245<br>
+    <strong>Despesas Extra Paga: </strong> R$ 152,90<br>
+    <strong>Prestacao de Servico: :</strong> R$ 783,75<br>
+    <strong>Total Despesas Pagas:</strong> - R$ 2.093,00<br>
+    R$ 5.408,00 - R$ 2.093,00 = <strong>Saldo Final em Caixa: R$ 3.316,00</strong>
+  </p>
+</div>
+
+<div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 6px solid #856404;">
+  <h4 style="color: #856404; margin-top: 0;">📌 Pendências de Agosto:</h4>
+  <ul style="margin: 0; padding-left: 20px; color: #856404; line-height: 1.6;">
+    <li>WhatsApp Business + Zapier: R$ 75,00</li>
+    <li>Mercado: R$ 68,48 (Lucas)</li>
+    <li>Mercado: R$ 30,40 (Lucas)</li>
+    <li>Gestão de Lucas(15%): R$ 152,55</li>
+    <li>Faxina Lucas: R$ 60,00</li>
+  </ul>
+</div>
+  `;
+}
+
+function mostrarAba(id) {
+  document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector(`button[onclick="mostrarAba('${id}')"]`).classList.add('active');
+}
+
+// Inicializar a página
+atualizarAbas();
+</script>
+</body>
+</html>
