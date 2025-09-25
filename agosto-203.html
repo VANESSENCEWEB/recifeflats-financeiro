@@ -313,12 +313,9 @@
   </header>
 
   <div class="resumo-anterior">
-    <h3>📋 Resumo do Mês Anterior (Julho 2025)</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-      <div><strong>Saldo Final Julho:</strong> R$ 1.016,22</div>
-      <div><strong>Receitas Julho:</strong> R$ 2.523,63</div>
-      <div><strong>Despesas Julho:</strong> R$ 1.825,79</div>
+   
       <div style="color: #28a745;"><strong>Saldo inicial para Agosto</strong></div>
+      R$ 1.079.82
     </div>
   </div>
 
@@ -359,16 +356,16 @@ const dados = [
   { data: '10/08/2025', tipo: 'Despesa', valor: 408.65, descricao: 'Condomínio', categoria: 'Fixa', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 242.17, descricao: 'Energia', categoria: 'Fixa', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 45.30, descricao: 'Internet', categoria: 'Fixa', status: 'PAGO ✅' },
-  { data: '10/08/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business', categoria: 'Fixa', status: 'PAGO ✅' },
-  { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automações', categoria: 'Fixa', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automações', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 66.30, descricao: 'CIM', categoria: 'Fixa', status: 'PAGO ✅' },
 
   // DESPESAS EXTRAS - Todas pagas
   { data: '10/08/2025', tipo: 'Despesa', valor: 32.03, descricao: 'Mercadinho', categoria: 'Extra', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 5.50, descricao: 'Uber Lucas', categoria: 'Extra', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 30.40, descricao: 'Mercadinho 2', categoria: 'Extra', status: 'PAGO ✅' },
-  { data: '10/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão parcela 02 de 10', categoria: 'Extra', status: 'PAGO ✅' },
-  { data: '10/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Jogo de cama (3/3)', categoria: 'Extra', status: 'PAGO ✅' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão parcela 02 de 10', categoria: 'Extra', status: 'PENDENTE ⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Jogo de cama (3/3)', categoria: 'Extra', status: 'PENDENTE ⚠️' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 85.90, descricao: 'Cadeado cofre', categoria: 'Extra', status: 'PAGO ✅' },
 
   // PRESTADORES - Gabriela paga, Lucas pendente
@@ -378,15 +375,15 @@ const dados = [
   { data: '10/08/2025', tipo: 'Despesa', valor: 27.97, descricao: 'Vale Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie', categoria: 'Prestador', status: 'PAGO ✅' },
-  { data: '08/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PAGO ✅' },
-  { data: '11/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '08/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+  { data: '11/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
   { data: '15/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '18/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '22/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Barbara', categoria: 'Prestador', status: 'PAGO ✅' }
 ];
 
 // Saldo inicial correto vindo de julho
-const saldoInicialAgosto = 1016.22;
+const saldoInicialAgosto = 1079.82;
 
 function gerarTabela(lista, titulo) {
   if (lista.length === 0) return '<p>Nenhum registro encontrado</p>';
@@ -501,29 +498,21 @@ function atualizarAbas() {
     
     <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
       <h4 style="color: #28a745;">💰 Continuidade de Julho:</h4>
-      <p><strong>Saldo Final de Julho:</strong> R$ ${saldoInicialAgosto.toFixed(2)}</p>
+      <p><strong>Saldo Final de Julho:</strong> R$ 1.079.82</p>
     </div>
     
     <h4>📊 Movimentação de Agosto:</h4>
-    <p><strong>➕ Receitas Recebidas:</strong> R$ ${totalReceitasRecebidas.toFixed(2)}</p>
-    <p><strong>➖ Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
-    <p><strong>➖ Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
-    <p><strong>➖ Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
-    <p><strong>Total Despesas Agosto:</strong> R$ ${totalDespesasAgosto.toFixed(2)}</p>
+    <p><strong>➕ Receitas Recebidas:</strong> R$ 2.656.58</p>
+    <p><strong>➖ Despesas Fixas:</strong> R$ 762.42</p>
+    <p><strong>➖ Despesas Extras:</strong> R$ 153.83</p>
+    <p><strong>➖ Prestadores:</strong> R$ 828.75</p>
+    <p><strong>Total Despesas Agosto:</strong> R$1.745 </p>
     
+
+    Receitas 2.334.68 - Despesas 1.745 = Saldo final 589.68 + Saldo inicial 1.079.82 = Saldo para setembro 1.669,50
     <hr><br>
     
-    <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border: 2px solid #28a745;">
-      <h3 style="color: #28a745; margin: 0;">💰 CÁLCULO FINAL:</h3>
-      <p style="font-size: 1.1em; margin: 10px 0;">
-        <strong>R$ ${saldoInicialAgosto.toFixed(2)}</strong> (saldo julho) + 
-        <strong>R$ ${totalReceitasRecebidas.toFixed(2)}</strong> (receitas recebidas) - 
-        <strong>R$ ${totalDespesasAgosto.toFixed(2)}</strong> (despesas pagas)
-      </p>
-      <hr style="border: 1px solid #28a745;">
-      <h2 style="color: #28a745; margin: 10px 0;">🎯 CAIXA FINAL AGOSTO: R$ ${saldoFinalAgosto.toFixed(2)}</h2>
-    </div>
-    
+    <
     <br>
     <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
       <h4 style="color: #856404;">📝 Pendências para Setembro:</h4>
