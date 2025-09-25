@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Financeiro - Golden View 1006 - Agosto 2025</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin: 2rem 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header h2 {
+      color: #f59e0b;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Previous month summary */
+    .resumo-anterior {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+    }
+
+    .resumo-anterior h3 {
+      color: #166534;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .resumo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .resumo-item {
+      background: rgba(255,255,255,0.8);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .resumo-item strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #374151;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .resumo-valor {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #166534;
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .tabs button {
+      background: white;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .tabs button.active,
+    .tabs button:hover {
+      background: #f59e0b;
+      color: white;
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Tables */
+    .table-container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    
+    .table-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 1.25rem 1.5rem;
+    }
+    
+    .table-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #374151;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    
+    tr:hover {
+      background: #f8fafc;
+    }
+    
+    /* Platform badges */
+    .plataforma-booking {
+      background: linear-gradient(135deg, #003580, #0057b8);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .plataforma-airbnb {
+      background: linear-gradient(135deg, #FF5A5F, #ff787d);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    .plataforma-direta {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.7rem;
+      display: inline-block;
+      min-width: 80px;
+      text-align: center;
+    }
+    
+    /* Status */
+    .status-recebido { color: #22c55e; font-weight: 700; }
+    .status-aguardando { color: #ef4444; font-weight: 700; }
+    .pendente { color: #ef4444; font-weight: 700; }
+    .receita { color: #22c55e; font-weight: 700; }
+    .despesa { color: #ef4444; font-weight: 700; }
+    
+    /* Receipt links */
+    .link-recibo {
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      color: #1d4ed8;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border: 1px solid transparent;
+    }
+
+    .link-recibo:hover {
+      background: #1d4ed8;
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
+    }
+
+    .sem-recibo {
+      color: #9ca3af;
+      font-style: italic;
+      font-size: 0.7rem;
+    }
+    
+    /* Summary */
+    .summary-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin: 2rem 0;
+    }
+    
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .summary-card {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid #f59e0b;
+    }
+    
+    .summary-card h4 {
+      color: #0f172a;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .summary-card p {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .final-balance {
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      border: 2px solid #22c55e;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .final-balance h3 {
+      color: #166534;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .final-balance h2 {
+      color: #166534;
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+    
+    .pendencias {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 1px solid #f59e0b;
+      border-left: 4px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .pendencias h4 {
+      color: #92400e;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .pendencias ul {
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .pendencias li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+    
+    .valor {
+      font-weight: 700;
+      color: #065f46;
+    }
+    
+    .destaque {
+      font-size: 1rem;
+      color: #b91c1c;
+      font-weight: 700;
+    }
+    
+    .observacao {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f59e0b;
+      font-weight: 700;
+      color: #92400e;
+    }
+    
+    /* Mobile */
+    @media (max-width: 768px) {
+      .tabs { flex-direction: column; }
+      .tabs button { width: 100%; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .resumo-grid { grid-template-columns: 1fr; }
+      table { min-width: 500px; font-size: 0.8rem; }
+      th, td { padding: 0.5rem 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="navbar-brand">🏢 Golden View 1006</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <header class="page-header">
+        <h1>Relatório Financeiro</h1>
+        <h2>Golden View 1006 - Agosto 2025</h2>
+        <p>Edifício Golden View • Atualizado em 31/08/2025</p>
+      </header>
+
+      <section class="resumo-anterior">
+        <h3>📋 Resumo do Mês Anterior (Julho 2025)</h3>
+        <div class="resumo-grid">
+          <div class="resumo-item">
+            <strong>Saldo Final Julho</strong>
+            <div class="resumo-valor">R$ 683.02</div>
+            <div style="color: #166534; font-weight: 600; margin-top: 0.5rem; font-size: 0.85rem;">
+              <strong>Saldo inicial em Agosto</strong>
+            </div>
+          </div>
+          <div class="resumo-item">
+            <strong>Atenção às pendências</strong>
+            <div class="resumo-valor">e datas de pagamento</div>
+          </div>
+          <div class="resumo-item">
+            <strong>Precifique e saiba quanto tem no caixa</strong>
+            <div class="resumo-valor">Quanto falta para faturamento mínimo</div>
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs">
+        <button onclick="mostrarAba('receitas')" class="active">Receitas</button>
+        <button onclick="mostrarAba('fixas')">Despesas Fixas</button>
+        <button onclick="mostrarAba('extras')">Despesas Extras</button>
+        <button onclick="mostrarAba('prestadores')">Prestadores</button>
+        <button onclick="mostrarAba('resumo')">Resumo</button>
+      </nav>
+
+      <div id="receitas" class="tab-content active"></div>
+      <div id="fixas" class="tab-content"></div>
+      <div id="extras" class="tab-content"></div>
+      <div id="prestadores" class="tab-content"></div>
+      <div id="resumo" class="tab-content"></div>
+    </div>
+  </main>
+
+  <script>
+    // Dados organizados para Agosto 2025
+    const receitas = [
+      { data: '01/08/2025', valor: 165.00, plataforma: 'BOOKING.COM', hospede: 'Adryan Kennedy', status: 'Recebido ✅', recibo: '', codigoReserva: '532493199' },
+      { data: '05/08/2025', valor: 95.70, plataforma: 'BOOKING.COM', hospede: 'Flávio de Barros', status: 'Recebido ✅', recibo: '', codigoReserva: '660954279' },
+      { data: '06/08/2025', valor: 110.00, plataforma: 'RESERVA DIRETA', hospede: 'Flávio de Barros - 06/08', status: 'Recebido ✅', recibo: '' },
+      { data: '07/08/2025', valor: 110.00, plataforma: 'RESERVA DIRETA', hospede: 'Flávio de Barros - 07/08', status: 'Recebido ✅', recibo: '' },
+      { data: '08/08/2025', valor: 110.00, plataforma: 'RESERVA DIRETA', hospede: 'Flávio de Barros - 08/08', status: 'Recebido ✅', recibo: '' },
+      { data: '08/08/2025', valor: 556.80, plataforma: 'BOOKING.COM', hospede: 'Roberta Paiva', status: 'Recebido ✅', recibo: '', codigoReserva: '576884675' },
+      { data: '08/08/2025', valor: 321.90, plataforma: 'BOOKING.COM', hospede: 'Salustiano Seixas', status: 'Recebido ✅', recibo: '', codigoReserva: '592884566' },
+      { data: '09/08/2025', valor: 689.81, plataforma: 'BOOKING.COM', hospede: 'Sergio Henrique', status: 'Recebido ✅', recibo: '', codigoReserva: '606733229' },
+      { data: '24/08/2025', valor: 269.70, plataforma: 'BOOKING.COM', hospede: 'Aline Olimpio', status: 'Recebido ✅', recibo: '', codigoReserva: '623721645' },
+      { data: '25/08/2025', valor: 261.00, plataforma: 'BOOKING.COM', hospede: 'Ana Paula Moraes', status: 'Recebido ✅', recibo: '', codigoReserva: '543850318' },
+      { data: '10/08/2025', valor: 337.56, plataforma: 'BOOKING.COM', hospede: 'Juselma Marques', status: 'Aguardando Pagamento ⏳', recibo: '', codigoReserva: '635815099' }
+    ];
+
+    const despesasFixas = [
+      { data: '10/08/2025', valor: 399.29, descricao: 'Condomínio', status: 'PAGO ✅', recibo: '' },
+      { data: '10/08/2025', valor: 359.27, descricao: 'Energia', status: 'PAGO ✅', recibo: '' },
+      { data: '10/08/2025', valor: 70.00, descricao: 'Internet', status: 'PAGO ✅', recibo: '' },
+      { data: '10/08/2025', valor: 87.57, descricao: 'IPTU', status: 'PAGO ✅', recibo: '' },
+      { data: '10/08/2025', valor: 50.00, descricao: 'WhatsApp Business (umbler talk)', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '10/08/2025', valor: 25.00, descricao: 'Zapier automações', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '10/08/2025', valor: 66.30, descricao: 'CIM', status: 'PAGO ✅', recibo: '' }
+    ];
+
+    const despesasExtras = [
+      { data: '12/08/2025', valor: 3.00, descricao: 'Água oxigenada', status: 'PAGO ✅', recibo: '' },
+      { data: '15/08/2025', valor: 26.49, descricao: 'COLA SUPERBONDER', status: 'PAGO ✅', recibo: '' },
+      { data: '15/08/2025', valor: 188.70, descricao: 'TELEVISAO NOVA (PARCELA 03 DE 06)', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '15/08/2025', valor: 123.78, descricao: 'MICROONDAS (PARCELA 03 DE 05)', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '20/08/2025', valor: 27.76, descricao: 'Lavagem Roupas', status: 'PAGO ✅', recibo: '' },
+      { data: '25/08/2025', valor: 13.50, descricao: 'Mercado', status: 'PAGO ✅', recibo: '' },
+      { data: '28/08/2025', valor: 18.00, descricao: 'PASSAGEM DANI FAXINEIRA', status: 'PAGO ✅', recibo: '' }
+    ];
+
+    const prestadores = [
+      { data: '10/08/2025', valor: 100.00, descricao: 'Adm Gabriela', status: 'PAGO ✅', recibo: 'https://drive.google.com/file/d/1yV11_Kr-wKNoeTpn-cAYfMjSA7iymGVh/view' },
+      { data: '10/08/2025', valor: 119.85, descricao: 'Lucas', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '15/08/2025', valor: 120.00, descricao: 'Faxina - Barbara ', status: 'PAGO ✅', recibo: '' },
+      { data: '18/08/2025', valor: 120.00, descricao: 'Faxina - Barbara ', status: 'PAGO ✅', recibo: '' },
+      { data: '25/08/2025', valor: 120.00, descricao: 'Faxina - Barbara ', status: 'PAGO ✅', recibo: '' },
+      { data: '02/08/2025', valor: 100.00, descricao: 'Faxina - Lucas ', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '04/08/2025', valor: 100.00, descricao: 'Faxina - Lucas ', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '09/08/2025', valor: 100.00, descricao: 'Faxina - Lucas ', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '27/08/2025', valor: 100.00, descricao: 'Faxina - Lucas ', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '29/08/2025', valor: 100.00, descricao: 'Faxina - Lucas ', status: 'PENDENTE ⚠️', recibo: '' },
+      { data: '10/08/2025', valor: 98.75, descricao: 'Contabilidade AGOSTO', status: 'PAGO ✅', recibo: '' },
+      { data: '10/08/2025', valor: 25.00, descricao: 'Omie', status: 'PAGO ✅', recibo: '' }
+    ];
+
+    function formatarMoeda(valor) {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+    }
+
+    function gerarTabelaReceitas() {
+      const total = receitas.reduce((s, r) => s + r.valor, 0);
+      
+      let html = `
+        <div class="table-container">
+          <div class="table-header">
+            <h2>Receitas - Agosto 2025</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Valor</th>
+                  <th>Plataforma</th>
+                  <th>Hóspede</th>
+                  <th>Status</th>
+                  <th>Recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+      
+      receitas.forEach(receita => {
+        let plataformaClass = '';
+        if (receita.plataforma === 'BOOKING.COM') plataformaClass = 'plataforma-booking';
+        else if (receita.plataforma === 'AIRBNB') plataformaClass = 'plataforma-airbnb';
+        else if (receita.plataforma === 'RESERVA DIRETA') plataformaClass = 'plataforma-direta';
+        
+        const statusClass = receita.status.includes('Aguardando') ? 'status-aguardando' : 'status-recebido';
+        const linkRecibo = receita.recibo && receita.recibo.trim() ? 
+          `<a href="${receita.recibo}" target="_blank" rel="noopener noreferrer" class="link-recibo">📄 Recibo</a>` : 
+          '<span class="sem-recibo">Sem recibo</span>';
+        
+        html += `
+          <tr>
+            <td>${receita.data}</td>
+            <td class="receita">${formatarMoeda(receita.valor)}</td>
+            <td><span class="${plataformaClass}">${receita.plataforma}</span></td>
+            <td>${receita.hospede}</td>
+            <td class="${statusClass}">${receita.status}</td>
+            <td>${linkRecibo}</td>
+          </tr>
+        `;
+      });
+      
+      html += `
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td><strong>Total</strong></td>
+                  <td><strong>${formatarMoeda(total)}</strong></td>
+                  <td colspan="4"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      return html;
+    }
+
+    function gerarTabelaDespesas(despesas, titulo) {
+      const total = despesas.reduce((s, d) => s + d.valor, 0);
+      
+      let html = `
+        <div class="table-container">
+          <div class="table-header">
+            <h2>${titulo}</h2>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Valor</th>
+                  <th>Descrição</th>
+                  <th>Status</th>
+                  <th>Recibo</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+      
+      despesas.forEach(despesa => {
+        const statusClass = despesa.status.includes('PENDENTE') ? 'pendente' : '';
+        const linkRecibo = despesa.recibo && despesa.recibo.trim() ? 
+          `<a href="${despesa.recibo}" target="_blank" rel="noopener noreferrer" class="link-recibo">📄 Recibo</a>` : 
+          '<span class="sem-recibo">Sem recibo</span>';
+        
+        html += `
+          <tr>
+            <td>${despesa.data}</td>
+            <td class="despesa">${formatarMoeda(despesa.valor)}</td>
+            <td>${despesa.descricao}</td>
+            <td class="${statusClass}">${despesa.status}</td>
+            <td>${linkRecibo}</td>
+          </tr>
+        `;
+      });
+      
+      html += `
+                <tr style="font-weight: 700; background: #f8fafc; border-top: 2px solid #e2e8f0;">
+                  <td><strong>Total</strong></td>
+                  <td><strong>${formatarMoeda(total)}</strong></td>
+                  <td colspan="3"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      return html;
+    }
+
+    function gerarResumo() {
+      const saldoInicialAgosto = 683.02;
+      const receitasRecebidas = receitas.filter(r => r.status.includes('Recebido'));
+      const receitasPendentes = receitas.filter(r => r.status.includes('Aguardando'));
+      
+      const totalReceitasRecebidas = receitasRecebidas.reduce((s, r) => s + r.valor, 0);
+      const totalReceitasPendentes = receitasPendentes.reduce((s, r) => s + r.valor, 0);
+      
+      const fixasPagas = despesasFixas.filter(d => d.status.includes('PAGO')).reduce((s, d) => s + d.valor, 0);
+      const extrasPagas = despesasExtras.filter(d => d.status.includes('PAGO')).reduce((s, d) => s + d.valor, 0);
+      const prestadoresPagos = prestadores.filter(p => p.status.includes('PAGO')).reduce((s, p) => s + p.valor, 0);
+      
+      const fixasPendentes = despesasFixas.filter(d => d.status.includes('PENDENTE')).reduce((s, d) => s + d.valor, 0);
+      const extrasPendentes = despesasExtras.filter(d => d.status.includes('PENDENTE')).reduce((s, d) => s + d.valor, 0);
+      const prestadoresPendentes = prestadores.filter(p => p.status.includes('PENDENTE')).reduce((s, p) => s + p.valor, 0);
+      
+      const totalDespesasPagas = fixasPagas + extrasPagas + prestadoresPagos;
+      const totalPendencias = fixasPendentes + extrasPendentes + prestadoresPendentes;
+      const saldoAtual = saldoInicialAgosto + totalReceitasRecebidas - totalDespesasPagas;
+
+      return `
+        <div class="summary-section">
+          <div class="table-header">
+            <h2>Resumo do Caixa - Agosto 2025</h2>
+          </div>
+          
+          <div class="summary-card" style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); margin-bottom: 2rem; border-left-color: #22c55e;">
+            <h4 style="color: #166534; display: flex; align-items: center; gap: 0.5rem;">
+              💰 Continuidade de Julho:
+            </h4>
+            <p style="font-size: 1.1rem; margin: 0;">
+              <strong>Saldo Final de Julho:</strong> 
+              <span style="color: #166534; font-weight: 800;">${formatarMoeda(saldoInicialAgosto)}</span>
+            </p>   
+          </div>
+          
+          <div class="summary-grid">
+            <div class="summary-card">
+              <h4>💸 Despesas Pagas</h4>
+              <p><strong>Fixas:</strong> <span class="despesa">${formatarMoeda(fixasPagas)}</span></p>
+              <p><strong>Extras:</strong> <span class="despesa">${formatarMoeda(extrasPagas)}</span></p>
+              <p><strong>Prestadores:</strong> <span class="despesa">${formatarMoeda(prestadoresPagos)}</span></p>
+              <p><strong>Total Pago:</strong> <span class="despesa">${formatarMoeda(totalDespesasPagas)}</span></p>
+            </div>
+          </div>
+          
+          <div class="final-balance">
+            <h3>💰 SALDO ATUAL NO CAIXA:</h3>
+            <p style="margin: 1rem 0; color: #374151;">
+              (saldo inicial)683.02 + R$2.689.44(receitas recebidas) - R$ 1.654,93(despesas pagas)
+            </p>
+            <h2>${formatarMoeda(saldoAtual)}</h2>
+          </div>
+          
+          <div class="pendencias">
+            <h4>📋 Pendências de Agosto:</h4>
+            
+            <ul>
+              <li><strong>Saldo atual no Caixa:</strong> <span class="valor">${formatarMoeda(saldoAtual)}</span></li>
+              <li><strong>Receitas Pendentes:</strong></li>
+              <ul>
+                <li>Juselma Marques: <span class="valor">${formatarMoeda(337.56)}</span></li>
+              </ul>
+              <li><strong>Despesas Fixas Pendentes:</strong></li>
+              <ul>
+                <li>WhatsApp Business (umbler talk): <span class="valor">${formatarMoeda(50.00)}</span></li>
+                <li>Zapier automações: <span class="valor">${formatarMoeda(25.00)}</span></li>
+              </ul>
+              <li><strong>Despesas Extras Pendentes:</strong></li>
+              <ul>
+                <li>TELEVISAO NOVA (PARCELA 03 DE 06): <span class="valor">${formatarMoeda(188.70)}</span></li>
+                <li>MICROONDAS (PARCELA 03 DE 05): <span class="valor">${formatarMoeda(123.78)}</span></li>
+              </ul>
+              <li><strong>Prestadores Pendentes:</strong></li>
+              <ul>
+                <li>Lucas: <span class="valor">119.85</span></li>
+              </ul>
+            </ul>
+            <p style="margin-top: 1rem; font-weight: 700;">
+              <strong>Total de Pendências:</strong> <span class="destaque">${formatarMoeda(totalPendencias)}</span>
+            </p>
+
+           <p> 5 Faxinas de Lucas pendentes: R$ 500,00
+            <div class="observacao">
+              ⚠️ <strong>Observação:</strong> O saldo atual no caixa não cobre todas as pendências. É crucial precificar e gerenciar cuidadosamente os pagamentos futuros para evitar déficits.
+          </div>
+          
+          
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    function mostrarAba(abaId) {
+      // Remove active de todas as abas
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tabs button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Ativa a aba selecionada
+      document.getElementById(abaId).classList.add('active');
+      document.querySelector(`button[onclick="mostrarAba('${abaId}')"]`).classList.add('active');
+    }
+
+    function inicializar() {
+      // Popular as abas
+      document.getElementById('receitas').innerHTML = gerarTabelaReceitas();
+      document.getElementById('fixas').innerHTML = gerarTabelaDespesas(despesasFixas, 'Despesas Fixas - Agosto 2025');
+      document.getElementById('extras').innerHTML = gerarTabelaDespesas(despesasExtras, 'Despesas Extras - Agosto 2025');
+      document.getElementById('prestadores').innerHTML = gerarTabelaDespesas(prestadores, 'Prestadores de Serviço - Agosto 2025');
+      document.getElementById('resumo').innerHTML = gerarResumo();
+      
+      // Mostrar a primeira aba
+      mostrarAba('receitas');
+    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', inicializar);
+  </script>
+</body>
+</html>4>
