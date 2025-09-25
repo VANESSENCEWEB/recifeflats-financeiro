@@ -2,391 +2,252 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Relatório Financeiro - Ap. 804</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Relatório financeiro do Apartamento 804 - Agosto 2025">
+  <title>Relatório Financeiro - Apt. 804 | Agosto 2025</title>
   <style>
+    /* --- Reset e Base --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f7fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
       color: #333;
-      margin: 0;
-      padding: 20px;
+      line-height: 1.6;
     }
+    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
 
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    h1 {
-      margin: 0;
-      color: #0f172a;
-    }
-
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .tabs button {
-      background: #0ea5e9;
+    /* --- Navbar --- */
+    .navbar {
+      background: linear-gradient(135deg, #002c7e, #0ea5e9);
+      padding: 1rem 0;
       color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 15px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+    .navbar-brand { display: flex; align-items: center; font-weight: 700; color: white; text-decoration: none; }
+    .navbar-brand:hover { text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    .dropdown { position: relative; }
+    .dropdown-toggle {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
       cursor: pointer;
-      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
     }
-
-    .tabs button:hover,
-    .tabs button.active {
-      background: #0369a1;
+    .dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      min-width: 220px;
+      opacity: 0; visibility: hidden; transform: translateY(-10px);
+      transition: 0.3s ease;
     }
+    .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown-header { padding: 0.5rem 1rem; font-weight: 700; font-size: 0.8rem; background: #0ea5e9; color: white; }
+    .dropdown-item { padding: 0.75rem 1rem; display: block; text-decoration: none; color: #333; }
+    .dropdown-item:hover { background: #f0f9ff; color: #0ea5e9; }
 
+    /* --- Header --- */
+    .page-header {
+      text-align: center;
+      margin: 2rem 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .page-header h1 { font-size: 2rem; font-weight: 800; color: #0f172a; }
+    .page-header h2 { font-size: 1.4rem; font-weight: 600; color: #0ea5e9; margin-top: 0.5rem; }
+
+    /* --- Tabs --- */
+    .tabs { display: flex; justify-content: center; gap: 0.5rem; margin: 2rem 0; flex-wrap: wrap; }
+    .tabs button {
+      padding: 0.75rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .tabs button.active, .tabs button:hover { background: #0ea5e9; color: white; border-color: #0ea5e9; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
+    /* --- Tabelas --- */
+    .table-container {
       background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      border-radius: 8px;
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 0.75rem; border-bottom: 1px solid #f1f5f9; text-align: left; }
+    th { background: #f8fafc; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+    tr:hover { background: #f9fafb; }
+    .receita { color: #22c55e; font-weight: 700; }
+    .despesa { color: #ef4444; font-weight: 700; }
+    .pendente { color: #eab308; font-weight: 700; }
+    .status-concluido { color: #22c55e; font-weight: 700; }
 
-    th, td {
-      padding: 12px 16px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
+    /* --- Resumo --- */
+    .summary-section { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .final-balance {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      padding: 2rem;
+      text-align: center;
+      border-radius: 16px;
+      border: 2px solid #22c55e;
     }
-
-    th { background: #e2e8f0; }
-    tr:hover { background: #f1f5f9; }
-
-    .receita { color: green; font-weight: bold; }
-    .despesa { color: red; font-weight: bold; }
-
-     /* NAVBAR STYLES */
-    .navbar {
-      background: #002c7e;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      padding: 0;
-    }
-
-    .navbar-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 20px;
-    }
-
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: white;
-      font-weight: 700;
-      font-size: 1.3rem;
-      transition: all 0.3s ease;
-    }
-
-    .navbar-brand:hover {
-      transform: scale(1.05);
-      color: #ffd700;
-    }
-
-    .navbar-brand .icon {
-      font-size: 1.8rem;
-      margin-right: 10px;
-    }
-
-    .navbar-nav {
-      display: flex;
-      align-items: center;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      gap: 10px;
-    }
-
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .dropdown-toggle {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .dropdown-toggle:hover {
-      background: rgba(255,255,255,0.2);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      min-width: 200px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
-      z-index: 1001;
-      margin-top: 10px;
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-item {
-      display: block;
-      padding: 12px 20px;
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid #f0f0f0;
-      transition: all 0.3s ease;
-    }
-
-    .dropdown-item:hover {
-      background: #076bcf;
-      color: #eeeff4;
-      padding-left: 25px;
-    }
-
-    .dropdown-item:last-child {
-      border-bottom: none;
-      border-radius: 0 0 10px 10px;
-    }
-
-    .dropdown-item:first-child {
-      border-radius: 10px 10px 0 0;
-    }
-
-    .dropdown-header {
-      padding: 10px 20px 5px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #f3f3f6;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 2px solid #f0f0f0;
-      background-color: #0ea5e9;
-    }
-
-    .navbar-tools {
-      display: flex;
-      gap: 10px;
-    }
-
-    .footer:hover {
-      color: #e7320e;
-    }
-
+    .pendencias { margin-top: 2rem; background: #fef3c7; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #f59e0b; }
+    footer { background: #0f172a; color: white; text-align: center; padding: 2rem 0; margin-top: 3rem; }
   </style>
 </head>
 <body>
-    <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="navbar-container">
-      <a href="index.html" class="navbar-brand">
-        <span class="icon">🏠</span>
-        <span>Fechamento de Caixa</span>
-      </a>
-
-      <ul class="navbar-nav">
-        <!-- Dropdown Apartamentos -->
-        <li class="nav-dropdown">
-          <a href="#" class="dropdown-toggle">
-            🏢 Apartamentos <span>▼</span>
-          </a>
-          <div class="dropdown-menu">
-            <div class="dropdown-header">Apto 105 - Principal</div>
-            <a href="junho-105.html" class="dropdown-item">📊 Junho 2025</a>
-            <a href="julho-105.html" class="dropdown-item">📈 Julho 2025</a>
-            <a href="agosto-105.html" class="dropdown-item">📉 Agosto 2025</a>
-            <a href="setembro-105.html" class="dropdown-item">📉 Setembro 2025</a>
-
-            <div class="dropdown-header">Apto 203 - Intermediário</div>
-            <a href="junho-203.html" class="dropdown-item">📊 Junho 2025</a>
-            <a href="julho-203.html" class="dropdown-item">📈 Julho 2025</a>
-            <a href="agosto-203.html" class="dropdown-item">📉 Agosto 2025</a>
-            <a href="setembro-203.html" class="dropdown-item">📉 Setembro 2025</a>
-
-            <div class="dropdown-header">Apto 1006 - Golden View</div>
-            <a href="junho-1006.html" class="dropdown-item">📊 Junho 2025</a>
-            <a href="julho-1006.html" class="dropdown-item">📈 Julho 2025</a>
-            <a href="agosto-1006.html" class="dropdown-item">📉 Agosto 2025</a>
-            <a href="setembro-1006.html" class="dropdown-item">📉 Setembro 2025</a>
-
-            <div class="dropdown-header">Apto 804 - Premium</div>
-            <a href="junho-804.html" class="dropdown-item">📊 Junho 2025</a>
-            <a href="julho-804.html" class="dropdown-item">📈 Julho 2025</a>
-            <a href="agosto-804.html" class="dropdown-item">📉 Agosto 2025</a>
-            <a href="setembro-804.html" class="dropdown-item">📉 Setembro 2025</a>
-          </div>
-        </li>
+    <div class="container">
+      <a href="index.html" class="navbar-brand">🏠 Fechamento de Caixa</a>
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle">🏢 Apartamentos ▼</a>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">Apto 804 - Premium</div>
+          <a href="junho-804.html" class="dropdown-item">📊 Junho 2025</a>
+          <a href="julho-804.html" class="dropdown-item">📈 Julho 2025</a>
+          <a href="agosto-804.html" class="dropdown-item">📉 Agosto 2025</a>
+          <a href="setembro-804.html" class="dropdown-item">📉 Setembro 2025</a>
+        </div>
       </div>
-      </nav><br><hr>
+    </div>
+  </nav>
 
-<header>
-  <h1>Relatório Financeiro - Apartamento 804</h1>
-  <h2>Agosto 2025</h2>
-  <p>Edifício Forte São Pedro · Atualizado em 03/09/2025</p>
-</header>
+  <main class="container">
+    <header class="page-header">
+      <h1>Relatório Financeiro</h1>
+      <h2>Apartamento 804 - Agosto 2025</h2>
+      <p>Edifício Forte São Pedro • Atualizado em 03/09/2025</p>
+    </header>
 
-<div class="tabs">
-  <button onclick="mostrarAba('receitas')" class="active">Receitas</button>
-  <button onclick="mostrarAba('fixas')">Despesas Fixas</button>
-  <button onclick="mostrarAba('extras')">Despesas Extras</button>
-  <button onclick="mostrarAba('prestadores')">Prestadores</button>
-  <button onclick="mostrarAba('resumo')">Resumo Caixa</button>
-</div>
+    <nav class="tabs">
+      <button onclick="mostrarAba('receitas')" class="active">Receitas</button>
+      <button onclick="mostrarAba('fixas')">Fixas</button>
+      <button onclick="mostrarAba('extras')">Extras</button>
+      <button onclick="mostrarAba('prestadores')">Prestadores</button>
+      <button onclick="mostrarAba('resumo')">Resumo</button>
+    </nav>
 
-<div id="receitas" class="tab-content active"></div>
-<div id="fixas" class="tab-content"></div>
-<div id="extras" class="tab-content"></div>
-<div id="prestadores" class="tab-content"></div>
-<div id="resumo" class="tab-content"></div>
+    <div id="receitas" class="tab-content active"></div>
+    <div id="fixas" class="tab-content"></div>
+    <div id="extras" class="tab-content"></div>
+    <div id="prestadores" class="tab-content"></div>
+    <div id="resumo" class="tab-content"></div>
+  </main>
 
-<script>
-  const dados = [
-    // Receitas Airbnb
-    { data: '07/07/2025', tipo: 'Receita', valor: 1813.49, descricao: 'AIRBNB - Lázaro Ferreira' },
-    { data: '12/07/2025', tipo: 'Receita', valor: 1187.37, descricao: 'AIRBNB - Janahina Varela' },
+  <footer>
+    <a href="index.html" style="color:#60a5fa; text-decoration:none; font-weight:600;">🏠 Voltar à Página Inicial</a>
+  </footer>
 
+  <script>
+    const dados = [
+      // Receitas
+     
+      { data: '12/07/2025', tipo: 'Receita', valor: 1187.37, descricao: 'AIRBNB - Janahina Varela', status: 'Recebido ✅' },
+      { data: '12/07/2025', tipo: 'Receita', valor: 2934.92, descricao: 'Saldo Inicial Julho', status: 'Recebido ✅' },
+      { data: '12/07/2025', tipo: 'Receita', valor: 845.36, descricao: 'AIRBNB - DIFERENÇA NÃO EXPLICADA', status: 'Recebido ✅' },
 
+      // Fixas
+      { data: '10/08/2025', tipo: 'Despesa', valor: 749.96, descricao: 'Condomínio AGOSTO', categoria: 'Fixa', status: 'PAGO ✅' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 372.73, descricao: 'Energia AGOSTO', categoria: 'Fixa', status: 'PAGO ✅' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 129.90, descricao: 'Internet AGOSTO', categoria: 'Fixa', status: 'PAGO ✅' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 216.33, descricao: 'IPTU AGOSTO', categoria: 'Fixa', status: 'PAGO ✅' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 66.30, descricao: 'CIM (2 PARCELAS)', categoria: 'Fixa', status: 'PAGO ✅' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business AGOSTO', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automações AGOSTO', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+      { data: '10/08/2025', tipo: 'Despesa', valor: 0.00, descricao: 'Google Workspace AGOSTO', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
 
-   // Despesas Fixas
-{ data: '10/07/2025', tipo: 'Despesa', valor: 749.96, descricao: '✅ Condomínio AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 372.73, descricao: '✅ Energia AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 129.90, descricao: '✅ Internet AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 216.33, descricao: '✅ Iptu AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 66.30, descricao: '✅ CIM (2 PARCELAS)', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 50.00, descricao: '[PENDENTE] - Whatssap Business (umbler talk) AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 25.00, descricao: '[PENDENTE] - Zapier automacoes AGOSTO', categoria: 'Fixa' },
-{ data: '10/07/2025', tipo: 'Despesa', valor: 0.00, descricao: '[PENDENTE] - Google Workspace AGOSTO', categoria: 'Fixa' },
+      // Extras
+      { data: '12/08/2025', tipo: 'Despesa', valor: 22.79, descricao: 'Mercado', categoria: 'Extra', status: 'PAGO ✅' },
+      { data: '12/08/2025', tipo: 'Despesa', valor: 17.97, descricao: 'Atacado da Construção', categoria: 'Extra', status: 'PAGO ✅' },
+      { data: '12/08/2025', tipo: 'Despesa', valor: 390.00, descricao: 'Gesseiro e eletricista', categoria: 'Extra', status: 'PAGO ✅' },
+      { data: '12/08/2025', tipo: 'Despesa', valor: 4.80, descricao: 'Uber Lucas', categoria: 'Extra', status: 'PAGO ✅' },
 
+      // Prestadores
+      { data: '23/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela AGOSTO', categoria: 'Prestador', status: 'PAGO ✅' },
+      { data: '23/08/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade AGOSTO', categoria: 'Prestador', status: 'PAGO ✅' },
+      { data: '23/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie AGOSTO', categoria: 'Prestador', status: 'PAGO ✅' },
+      { data: '23/08/2025', tipo: 'Despesa', valor: 0.00, descricao: 'Lucas adm AGOSTO', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+    ];
 
+    function formatarMoeda(v) {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v);
+    }
 
-    // Despesas Extras
-    { data: '12/07/2025', tipo: 'Despesa', valor: 22.79, descricao: 'Mercado', categoria: 'Extra' },
-    { data: '12/07/2025', tipo: 'Despesa', valor: 17.97, descricao: 'Atacado da Construcao', categoria: 'Extra' },
-    { data: '12/07/2025', tipo: 'Despesa', valor: 390.00, descricao: 'Gesseiro e eletricista', categoria: 'Extra' },
-    { data: '12/07/2025', tipo: 'Despesa', valor: 4.80, descricao: 'Uber Lucas', categoria: 'Extra' },
-
-
-    // Prestadores
-    { data: '23/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela AGOSTO', categoria: 'Prestador' },
-    { data: '23/07/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade AGOSTO', categoria: 'Prestador' },
-    { data: '23/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'Omie AGOSTO', categoria: 'Prestador' },
-    { data: '23/07/2025', tipo: 'Despesa', valor: 0.00, descricao: 'Lucas adm AGOSTO', categoria: 'Prestador' },
-];
-
-  function gerarTabela(lista, titulo) {
-  if (lista.length === 0) return `<p>Nenhum registro</p>`;
-
-  let linhas = lista.map(item => `
-    <tr>
-      <td>${item.data}</td>
-      <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
-      <td>R$ ${item.valor.toFixed(2)}</td>
-      <td>${item.descricao}</td>
-    </tr>
-  `).join("");
-
-  const total = lista.reduce((s, d) => s + d.valor, 0);
-
-  return `
-    <h2>${titulo}</h2>
-    <table>
-      <thead>
+    function gerarTabela(lista, titulo) {
+      if (lista.length === 0) return `<div class="table-container"><h2>${titulo}</h2><p style="padding:2rem;text-align:center;color:#999">Nenhum registro</p></div>`;
+      let linhas = lista.map(item => `
         <tr>
-          <th>Data</th>
-          <th>Tipo</th>
-          <th>Valor</th>
-          <th>Descrição</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${linhas}
-        <tr style="font-weight:bold; background:#f1f5f9;">
-          <td colspan="2">Total</td>
-          <td>R$ ${total.toFixed(2)}</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  `;
-}
+          <td>${item.data}</td>
+          <td class="${item.tipo.toLowerCase()}">${item.tipo}</td>
+          <td>${formatarMoeda(item.valor)}</td>
+          <td>${item.descricao}</td>
+          <td class="${item.status.includes('PENDENTE') ? 'pendente' : 'status-concluido'}">${item.status}</td>
+        </tr>`).join("");
+      const total = lista.reduce((s,d)=>s+d.valor,0);
+      return `<div class="table-container">
+        <table>
+          <thead><tr><th>Data</th><th>Tipo</th><th>Valor</th><th>Descrição</th><th>Status</th></tr></thead>
+          <tbody>${linhas}
+          <tr style="font-weight:700;background:#f8fafc"><td colspan="2">Total</td><td>${formatarMoeda(total)}</td><td colspan="2"></td></tr>
+          </tbody></table></div>`;
+    }
 
-  function atualizarAbas() {
-    const receitas = dados.filter(d => d.tipo === 'Receita');
-    const fixas = dados.filter(d => d.categoria === 'Fixa');
-    const extras = dados.filter(d => d.categoria === 'Extra');
-    const prestadores = dados.filter(d => d.categoria === 'Prestador');
+    function atualizarAbas() {
+      const receitas = dados.filter(d => d.tipo === 'Receita');
+      const fixas = dados.filter(d => d.categoria === 'Fixa');
+      const extras = dados.filter(d => d.categoria === 'Extra');
+      const prestadores = dados.filter(d => d.categoria === 'Prestador');
 
-    const totalReceitas = receitas.reduce((s, d) => s + d.valor, 0);
-    const totalFixas = fixas.reduce((s, d) => s + d.valor, 0);
-    const totalExtras = extras.reduce((s, d) => s + d.valor, 0);
-    const totalPrestadores = prestadores.reduce((s, d) => s + d.valor, 0);
-    const caixaFinal = totalReceitas - (totalFixas + totalExtras + totalPrestadores);
+      const totalReceitas = receitas.reduce((s,d)=>s+d.valor,0);
+      const fixasPagas = fixas.filter(f=>f.status.includes('PAGO')).reduce((s,d)=>s+d.valor,0);
+      const extrasPagas = extras.filter(f=>f.status.includes('PAGO')).reduce((s,d)=>s+d.valor,0);
+      const prestadoresPagos = prestadores.filter(f=>f.status.includes('PAGO')).reduce((s,d)=>s+d.valor,0);
+      const totalDespesas = fixasPagas + extrasPagas + prestadoresPagos;
+      const caixaFinal = totalReceitas - totalDespesas;
 
-    document.getElementById('receitas').innerHTML = gerarTabela(receitas, 'Receitas');
-    document.getElementById('fixas').innerHTML = gerarTabela(fixas, 'Despesas Fixas');
-    document.getElementById('extras').innerHTML = gerarTabela(extras, 'Despesas Extras');
-    document.getElementById('prestadores').innerHTML = gerarTabela(prestadores, 'Prestadores de Serviço');
+      document.getElementById('receitas').innerHTML = gerarTabela(receitas,"Receitas - Agosto 2025");
+      document.getElementById('fixas').innerHTML = gerarTabela(fixas,"Despesas Fixas - Agosto 2025");
+      document.getElementById('extras').innerHTML = gerarTabela(extras,"Despesas Extras - Agosto 2025");
+      document.getElementById('prestadores').innerHTML = gerarTabela(prestadores,"Prestadores - Agosto 2025");
 
-    document.getElementById('resumo').innerHTML = `
-     <hr><br>
-    <h2>Resumo do Caixa</h2><br>
-      <p><strong>Total Receitas:</strong> R$ ${totalReceitas.toFixed(2)}</p>
-      <p><strong>Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
-      <p><strong>Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
-      <p><strong>Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
-      <hr><br>
-      <p><strong><h2>Caixa Final:</h2></strong> R$ ${caixaFinal.toFixed(2)}</p>
-    `;
-  }
+      document.getElementById('resumo').innerHTML = `
+        <div class="summary-section">
+          <h2>Resumo do Caixa - Agosto 2025</h2>
+          <p><strong>Receitas:</strong> ${formatarMoeda(totalReceitas)}</p>
+          <p><strong>Despesas Fixas Pagas:</strong> ${formatarMoeda(fixasPagas)}</p>
+          <p><strong>Despesas Extras Pagas:</strong> ${formatarMoeda(extrasPagas)}</p>
+          <p><strong>Prestadores Pagos:</strong> ${formatarMoeda(prestadoresPagos)}</p>
+          <div class="final-balance"><h3>Caixa Final</h3><h2>${formatarMoeda(caixaFinal)}</h2></div>
+          <div class="pendencias"><h4>📝 Pendências para Setembro</h4>
+            <p>WhatsApp Business, Zapier, Google Workspace, Adm Lucas</p>
+          </div>
+        </div>`;
+    }
 
-  function mostrarAba(id) {
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add('active');
-  }
+    function mostrarAba(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`.tabs button[onclick="mostrarAba('${id}')"]`).classList.add('active');
+    }
 
-  atualizarAbas();
-</script>
-
+    document.addEventListener("DOMContentLoaded", atualizarAbas);
+  </script>
 </body>
 </html>
