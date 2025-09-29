@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Executivo - Golden View 1006</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+    
+    .navbar {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin: 2rem 0;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .page-header h1 { font-size: 2.5rem; color: #0f172a; margin-bottom: 0.5rem; }
+    .page-header h2 { color: #f59e0b; font-size: 1.5rem; }
+    
+    .alert-critical {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      border-left: 6px solid #ef4444;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      50% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+    }
+    
+    .alert-critical h3 {
+      color: #991b1b;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .metric-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-left: 4px solid;
+      transition: transform 0.3s ease;
+    }
+    
+    .metric-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    
+    .metric-card.danger { border-left-color: #ef4444; }
+    .metric-card.warning { border-left-color: #f59e0b; }
+    .metric-card.success { border-left-color: #22c55e; }
+    .metric-card.info { border-left-color: #3b82f6; }
+    
+    .metric-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-card.danger .metric-value { color: #ef4444; }
+    .metric-card.warning .metric-value { color: #f59e0b; }
+    .metric-card.success .metric-value { color: #22c55e; }
+    .metric-card.info .metric-value { color: #3b82f6; }
+    
+    .metric-subtitle {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    
+    .section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .checklist {
+      list-style: none;
+    }
+    
+    .checklist-item {
+      padding: 1rem;
+      border-left: 4px solid #e2e8f0;
+      margin-bottom: 0.75rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .checklist-item:hover {
+      background: #f1f5f9;
+      border-left-color: #f59e0b;
+    }
+    
+    .checklist-item.completed {
+      border-left-color: #22c55e;
+      background: #f0fdf4;
+      opacity: 0.7;
+    }
+    
+    .checklist-item.urgent {
+      border-left-color: #ef4444;
+      background: #fef2f2;
+    }
+    
+    .problem-card {
+      background: #fef3c7;
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .problem-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .problem-title {
+      font-weight: 700;
+      color: #92400e;
+    }
+    
+    .problem-cost {
+      background: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 700;
+      color: #ef4444;
+    }
+    
+    .problem-impact {
+      font-size: 0.85rem;
+      color: #78350f;
+      margin-top: 0.5rem;
+    }
+    
+    .progress-bar {
+      background: #e2e8f0;
+      height: 30px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85rem;
+      transition: width 0.5s ease;
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2rem;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #f59e0b;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -1.7rem;
+      top: 12px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: #e2e8f0;
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .timeline-date {
+      font-weight: 700;
+      color: #f59e0b;
+      margin-bottom: 0.5rem;
+    }
+    
+    .calculator {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid #3b82f6;
+    }
+    
+    .calculator-input {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .input-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1e40af;
+      margin-bottom: 0.5rem;
+    }
+    
+    .input-group input {
+      padding: 0.75rem;
+      border: 2px solid #bfdbfe;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+    
+    .calculator-result {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    .result-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+    
+    .result-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #3b82f6;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid #e2e8f0;
+      background: white;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #64748b;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn.active {
+      background: #f59e0b;
+      color: white;
+      border-color: #f59e0b;
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .lucas-analysis {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 3px solid #f59e0b;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .lucas-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .scenario-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .scenario-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid;
+    }
+    
+    .scenario-card.current { border-color: #ef4444; }
+    .scenario-card.improved { border-color: #22c55e; }
+    
+    @media (max-width: 768px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .calculator-input { grid-template-columns: 1fr; }
+      .scenario-comparison { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="navbar-brand">📊 Dashboard Executivo - Golden View 1006</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <header class="page-header">
+        <h1>Dashboard de Gestão Financeira</h1>
+        <h2>Golden View 1006 - Setembro 2025</h2>
+        <p>Análise em tempo real • Atualizado em 30/09/2025 às 18:47</p>
+      </header>
+
+      <div class="alert-critical">
+        <h3>🚨 ALERTA CRÍTICO: Ação Imediata Necessária!</h3>
+        <p style="margin-bottom: 0.5rem;"><strong>Você está com DÉFICIT de R$ 1.807,59</strong></p>
+        <p style="font-size: 0.9rem; color: #7f1d1d;">Saldo atual (R$ 138,65) não cobre despesas pendentes (R$ 1.946,24). Prioridade: receber R$ 3.985,57 do Booking em 05/10/2025.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="metric-card danger">
+          <div class="metric-label">💰 Saldo em Caixa</div>
+          <div class="metric-value">R$ 138,65</div>
+          <div class="metric-subtitle">Crítico - Abaixo do mínimo operacional</div>
+        </div>
+
+        <div class="metric-card warning">
+          <div class="metric-label">⏳ Despesas Pendentes</div>
+          <div class="metric-value">R$ 1.946,24</div>
+          <div class="metric-subtitle">Acumuladas: Jul, Ago, Set</div>
+        </div>
+
+        <div class="metric-card success">
+          <div class="metric-label">📅 A Receber (05/Out)</div>
+          <div class="metric-value">R$ 3.985,57</div>
+          <div class="metric-subtitle">8 reservas Booking.com</div>
+        </div>
+
+        <div class="metric-card info">
+          <div class="metric-label">📊 Taxa de Ocupação</div>
+          <div class="metric-value">46%</div>
+          <div class="metric-subtitle">14 de 30 dias - Abaixo da meta</div>
+        </div>
+
+        <div class="metric-card warning">
+          <div class="metric-label">💵 Diária Média</div>
+          <div class="metric-value">R$ 148,72</div>
+          <div class="metric-subtitle">Meta: R$ 200+ (subprecificado)</div>
+        </div>
+
+        <div class="metric-card info">
+          <div class="metric-label">🏠 Reservas Setembro</div>
+          <div class="metric-value">4</div>
+          <div class="metric-subtitle">14 diárias totais</div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="changeTab('urgente')">🚨 Urgente</button>
+        <button class="tab-btn" onclick="changeTab('fluxo')">💰 Fluxo de Caixa</button>
+        <button class="tab-btn" onclick="changeTab('lucas')">👤 Análise Lucas</button>
+        <button class="tab-btn" onclick="changeTab('problemas')">🔧 Problemas</button>
+        <button class="tab-btn" onclick="changeTab('precificacao')">💲 Precificação</button>
+      </div>
+
+      <div id="urgente" class="tab-content active">
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">⚡ Checklist de Ações Urgentes (Esta Semana)</h2>
+          </div>
+          
+          <ul class="checklist">
+            <li class="checklist-item urgent" onclick="toggleCheck(this)">
+              <strong>🔴 DIA 05/OUT - Conferir Recebimento Booking</strong><br>
+              <span style="font-size: 0.85rem;">Acompanhar extrato bancário entre 00h-23h59. Total esperado: R$ 3.985,57</span>
+            </li>
+            <li class="checklist-item urgent" onclick="toggleCheck(this)">
+              <strong>🔴 Pagar TV + Microondas (Parcelas 4/6 e 4/5)</strong><br>
+              <span style="font-size: 0.85rem;">Total: R$ 312,48 - Não pode atrasar! Score de crédito em risco.</span>
+            </li>
+            <li class="checklist-item urgent" onclick="toggleCheck(this)">
+              <strong>🟡 Pagar WhatsApp Business (3 meses)</strong><br>
+              <span style="font-size: 0.85rem;">Total acumulado: R$ 150,00 (Jul + Ago + Set)</span>
+            </li>
+            <li class="checklist-item" onclick="toggleCheck(this)">
+              <strong>🟡 Reunião com Lucas - Revisar Comissão</strong><br>
+              <span style="font-size: 0.85rem;">Discutir modelo de 15% e expectativas. Ver análise detalhada na aba "Análise Lucas"</span>
+            </li>
+            <li class="checklist-item" onclick="toggleCheck(this)">
+              <strong>🟢 Comprar Filtro de Água</strong><br>
+              <span style="font-size: 0.85rem;">Custo: R$ 120 - ROI imediato em avaliações</span>
+            </li>
+            <li class="checklist-item" onclick="toggleCheck(this)">
+              <strong>🟢 Consertar Pé da Cama</strong><br>
+              <span style="font-size: 0.85rem;">Custo: R$ 80 - Evita reclamações</span>
+            </li>
+            <li class="checklist-item" onclick="toggleCheck(this)">
+              <strong>🟢 Trocar Senha Fechadura</strong><br>
+              <span style="font-size: 0.85rem;">Custo: GRÁTIS - Segurança essencial</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📋 Despesas Pendentes Detalhadas</h2>
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="color: #ef4444; margin-bottom: 1rem;">💸 JULHO (R$ 503,58)</h3>
+            <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; border-left: 4px solid #ef4444;">
+              <p>• WhatsApp Business: <strong>R$ 50,00</strong></p>
+              <p>• TV (Parcela 2/10): <strong>R$ 188,70</strong></p>
+              <p>• Microondas (Parcela 2/5): <strong>R$ 123,78</strong></p>
+              <p>• Administração Lucas: <strong>R$ 116,10</strong></p>
+              <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #991b1b;"><em>❌ Zapier cancelado (economizados R$ 25/mês)</em></p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1.5rem;">
+            <h3 style="color: #f59e0b; margin-bottom: 1rem;">💸 AGOSTO (R$ 1.013,18)</h3>
+            <div style="background: #fffbeb; padding: 1rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+              <p>• WhatsApp Business: <strong>R$ 50,00</strong></p>
+              <p>• TV (Parcela 3/10): <strong>R$ 188,70</strong></p>
+              <p>• Microondas (Parcela 3/5): <strong>R$ 123,78</strong></p>
+              <p>• Administração Lucas: <strong>R$ 125,70</strong></p>
+              <p>• 5 Faxinas Lucas: <strong>R$ 500,00</strong></p>
+            </div>
+          </div>
+
+          <div>
+            <h3 style="color: #f59e0b; margin-bottom: 1rem;">💸 SETEMBRO (R$ 429,48)</h3>
+            <div style="background: #fffbeb; padding: 1rem; border-radius: 8px; border-left: 4px solid #f59e0b;">
+              <p>• WhatsApp Business: <strong>R$ 50,00</strong></p>
+              <p>• TV (Parcela 4/6): <strong>R$ 188,70</strong></p>
+              <p>• Microondas (Parcela 4/5): <strong>R$ 123,78</strong></p>
+              <p>• Administração Lucas: <strong>A DEFINIR</strong></p>
+              <p>• 2 Água Oxigenada: <strong>R$ 7,00</strong></p>
+              <p>• Maçaneta: <strong>R$ 60,00</strong></p>
+            </div>
+          </div>
+
+          <div style="background: #fee2e2; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; text-align: center; border: 2px solid #ef4444;">
+            <h3 style="color: #991b1b; margin-bottom: 0.5rem;">TOTAL PENDENTE ACUMULADO</h3>
+            <p style="font-size: 2.5rem; font-weight: 900; color: #ef4444;">R$ 1.946,24</p>
+            <p style="font-size: 0.9rem; color: #7f1d1d; margin-top: 0.5rem;">
+              ⚠️ Prioridade: Pagar R$ 937,92 em parcelamentos (TV + Micro) + R$ 150 WhatsApp = R$ 1.087,92
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="fluxo" class="tab-content">
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">💰 Projeção de Fluxo de Caixa</h2>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">📅 HOJE (30/Set/2025)</div>
+              <div style="background: #fef2f2; padding: 1rem; border-radius: 8px;">
+                <p><strong>Saldo Atual:</strong> R$ 138,65</p>
+                <p style="font-size: 0.85rem; color: #7f1d1d;">Status: CRÍTICO - Caixa insuficiente</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">📅 05/OUTUBRO/2025</div>
+              <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                <p><strong>Entrada Prevista (Booking):</strong> +R$ 3.985,57</p>
+                <p><strong>Saldo Projetado:</strong> R$ 4.124,22</p>
+                <div class="progress-bar" style="margin-top: 0.5rem;">
+                  <div class="progress-fill" style="width: 100%;">100% confirmado</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">📅 Após Pagamento das Pendências</div>
+              <div style="background: #fffbeb; padding: 1rem; border-radius: 8px;">
+                <p><strong>Saldo:</strong> R$ 4.124,22</p>
+                <p><strong>Pagar Pendências:</strong> -R$ 1.946,24</p>
+                <p style="margin-top: 0.5rem; font-weight: 700; color: #22c55e;">
+                  <strong>Saldo Final:</strong> R$ 2.177,98
+                </p>
+                <p style="font-size: 0.85rem; color: #15803d; margin-top: 0.5rem;">
+                  ✅ Situação normalizada! Capital de giro restaurado.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">🎯 META OUTUBRO</div>
+              <div style="background: #dbeafe; padding: 1rem; border-radius: 8px;">
+                <p><strong>Objetivo:</strong> Elevar para R$ 3.500+</p>
+                <p><strong>Estratégia:</strong></p>
+                <ul style="margin-left: 1.5rem; font-size: 0.9rem; margin-top: 0.5rem;">
+                  <li>Aumentar diária média para R$ 200</li>
+                  <li>Atingir 60% de ocupação (18 dias)</li>
+                  <li>Criar fundo de reserva de 15%</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📊 Conferência Booking.com - 05/OUT</h2>
+          </div>
+
+          <div style="background: #eff6ff; padding: 1.5rem; border-radius: 12px; border: 2px solid #3b82f6;">
+            <h3 style="color: #1e40af; margin-bottom: 1rem;">✅ Checklist de Conferência</h3>
+            
+            <ul class="checklist">
+              <li class="checklist-item" onclick="toggleCheck(this)">
+                <strong>Verificar extrato Booking às 09h</strong><br>
+                <span style="font-size: 0.85rem;">Acessar painel financeiro do Booking.com</span>
+              </li>
+              <li class="checklist-item" onclick="toggleCheck(this)">
+                <strong>Conferir conta bancária às 10h, 14h e 18h</strong><br>
+                <span style="font-size: 0.85rem;">Buscar depósito de R$ 3.985,57</span>
+              </li>
+              <li class="checklist-item" onclick="toggleCheck(this)">
+                <strong>Validar 8 reservas individualmente</strong><br>
+                <span style="font-size: 0.85rem;">Juselma R$ 337,56 • Yasmin R$ 503 • Anna R$ 804 • Jefferson R$ 575,08 • Frederico R$ 234,90 • George R$ 208,80 • Eng. Meireles R$ 464,58 • Ana Celia R$ 857,65</span>
+              </li>
+              <li class="checklist-item" onclick="toggleCheck(this)">
+                <strong>Salvar comprovantes (PDF + Captura de tela)</strong><br>
+                <span style="font-size: 0.85rem;">Organizar por data e hóspede</span>
+              </li>
+              <li class="checklist-item" onclick="toggleCheck(this)">
+                <strong>Verificar se há descontos/taxas extras</strong><br>
+                <span style="font-size: 0.85rem;">Booking às vezes cobra taxas não previstas</span>
+              </li>
+            </ul>
+
+            <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+              <p style="font-size: 0.9rem; color: #1e40af;">
+                <strong>⚠️ IMPORTANTE:</strong> Se não receber até 17h do dia 05/10, ligar imediatamente para o suporte Booking: 0800-580-0550
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="lucas" class="tab-content">
+        <div class="lucas-analysis">
+          <div class="lucas-header">
+            <h2 style="color: #92400e;">👤 Análise Crítica: Comissão de Lucas (15% do Lucro Líquido)</h2>
+            <span style="background: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 700; color: #ef4444;">
+              ⚠️ Modelo não está funcionando
+            </span>
+          </div>
+
+          <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+            <h3 style="color: #0f172a; margin-bottom: 1rem;">🔍 Análise do Modelo Atual</h3>
+            
+            <p style="margin-bottom: 1rem;"><strong>Conceito:</strong> Lucas recebe 15% do lucro líquido (Receitas - Despesas)</p>
+            
+            <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #ef4444;">
+              <p style="color: #991b1b; font-weight: 700; margin-bottom: 0.5rem;">❌ PROBLEMAS IDENTIFICADOS:</p>
+              <ol style="margin-left: 1.5rem; color: #7f1d1d;">
+                <li><strong>Falta de clareza no cálculo:</strong> "Lucro líquido" é ambíguo. Quais despesas entram?</li>
+                <li><strong>Incentivo errado:</strong> Se o lucro cai, Lucas ganha menos, mas ele não controla preços</li>
+                <li><strong>Comissão não definida:</strong> Set/2025 ainda está "a definir"</li>
+                <li><strong>Pagamento atrasado:</strong> Jul e Ago não foram pagos</li>
+                <li><strong>Falta de alinhamento:</strong> Você esperava melhores resultados</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="scenario-comparison">
+            <div class="scenario-card current">
+              <h3 style="color: #ef4444; margin-bottom: 1rem;">📉 Cenário Atual (Set/2025)</h3>
+              <p style="font-size: 0.85rem; margin-bottom: 1rem;">Modelo: 15% do Lucro Líquido</p>
+              
+              <div style="background: #fef2f2; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>Receitas:</strong> R$ 2.082,08</p>
+                <p style="font-size: 0.85rem;"><strong>Despesas:</strong> R$ 2.588,37</p>
+                <p style="font-size: 0.85rem; color: #ef4444; font-weight: 700;"><strong>Lucro:</strong> -R$ 506,29</p>
+              </div>
+              
+              <div style="margin-top: 1rem; padding: 1rem; background: #fee2e2; border-radius: 8px;">
+                <p style="font-weight: 700; color: #991b1b;">Comissão Lucas: R$ 0,00</p>
+                <p style="font-size: 0.75rem; color: #7f1d1d; margin-top: 0.5rem;">
+                  Prejuízo = sem comissão. Lucas não tem incentivo para melhorar ocupação.
+                </p>
+              </div>
+            </div>
+
+            <div class="scenario-card improved">
+              <h3 style="color: #22c55e; margin-bottom: 1rem;">📈 Proposta: Modelo Híbrido</h3>
+              <p style="font-size: 0.85rem; margin-bottom: 1rem;">Fixo + Variável por Reserva</p>
+              
+              <div style="background: #f0fdf4; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>Fixo mensal:</strong> R$ 200,00</p>
+                <p style="font-size: 0.85rem;"><strong>+ R$ 30 por reserva:</strong> 4 × R$ 30 = R$ 120</p>
+                <p style="font-size: 0.85rem;"><strong>+ R$ 5 por diária:</strong> 14 × R$ 5 = R$ 70</p>
+              </div>
+              
+              <div style="margin-top: 1rem; padding: 1rem; background: #dcfce7; border-radius: 8px;">
+                <p style="font-weight: 700; color: #166534;">Total Set/2025: R$ 390,00</p>
+                <p style="font-size: 0.75rem; color: #15803d; margin-top: 0.5rem;">
+                  ✅ Incentivo claro: mais reservas = mais ganho
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem;">
+            <h3 style="color: #0f172a; margin-bottom: 1rem;">💡 Recomendação: Reunião Urgente com Lucas</h3>
+            
+            <div style="background: #eff6ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #3b82f6;">
+              <p style="margin-bottom: 0.5rem;"><strong>📋 Pauta da Reunião:</strong></p>
+              <ol style="margin-left: 1.5rem; font-size: 0.9rem; line-height: 1.8;">
+                <li>Revisar resultados Set/2025: 4 reservas, 14 diárias</li>
+                <li>Discutir por que ocupação está em 46% (meta: 65%)</li>
+                <li>Apresentar novo modelo de comissão</li>
+                <li>Definir metas claras para Out/2025</li>
+                <li>Acertar pendências Jul/Ago (R$ 741,80)</li>
+              </ol>
+            </div>
+
+            <div style="background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #f59e0b;">
+              <p style="color: #92400e; font-weight: 700; margin-bottom: 0.5rem;">🎯 Novo Acordo Proposto:</p>
+              <ul style="margin-left: 1.5rem; font-size: 0.9rem; color: #78350f; line-height: 1.8;">
+                <li><strong>Fixo:</strong> R$ 200/mês (cobre trabalho base)</li>
+                <li><strong>Variável:</strong> R$ 30/reserva + R$ 5/diária</li>
+                <li><strong>Bônus:</strong> +R$ 100 se atingir 18+ diárias/mês</li>
+                <li><strong>Meta mínima:</strong> 12 diárias/mês (senão rever acordo)</li>
+              </ul>
+            </div>
+
+            <div style="margin-top: 1rem; padding: 1rem; background: #f0fdf4; border-radius: 8px; text-align: center;">
+              <p style="font-size: 0.85rem; color: #166534; margin-bottom: 0.5rem;">Simulação Outubro com novo modelo:</p>
+              <p style="font-size: 1.8rem; font-weight: 900; color: #22c55e;">R$ 550 - R$ 650</p>
+              <p style="font-size: 0.75rem; color: #15803d;">Se atingir 18-20 diárias (meta realista)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📊 Comparação de Cenários: Lucas</h2>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #e2e8f0;">Métrica</th>
+                <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Modelo Atual (15%)</th>
+                <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Proposta Híbrida</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Setembro (4 reservas)</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #ef4444; font-weight: 700;">R$ 0</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #22c55e; font-weight: 700;">R$ 390</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Outubro (proj. 6 reservas)</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #f59e0b; font-weight: 700;">R$ 150</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #22c55e; font-weight: 700;">R$ 590</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Incentivo para aumentar reservas</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">❌ Baixo</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">✅ Alto</td>
+              </tr>
+              <tr>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Previsibilidade</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">❌ Volátil</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">✅ Base garantida</td>
+              </tr>
+              <tr style="background: #f8fafc; font-weight: 700;">
+                <td style="padding: 1rem;">Veredicto</td>
+                <td style="padding: 1rem; text-align: center; color: #ef4444;">NÃO FUNCIONA</td>
+                <td style="padding: 1rem; text-align: center; color: #22c55e;">RECOMENDADO</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="problemas" class="tab-content">
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">🔧 Problemas Relatados por Hóspedes</h2>
+            <span style="background: #fee2e2; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: #991b1b; font-weight: 700;">
+              Impacto: -R$ 450/mês em avaliações
+            </span>
+          </div>
+
+          <div class="problem-card" style="border-color: #ef4444; background: #fee2e2;">
+            <div class="problem-header">
+              <span class="problem-title">🔥 CRÍTICO: Fogão</span>
+              <span class="problem-cost">R$ 800</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #7f1d1d; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Precisa trocar. Tirar foto para vender o atual.
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Hóspedes reclamam em avaliações. Reduz nota para 8.5 ou menos.<br>
+              <strong>Perda mensal:</strong> -R$ 300 (menos reservas por nota baixa)<br>
+              <strong>ROI:</strong> 2.7 meses
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação Recomendada:</strong> Comprar fogão 4 bocas em 12x de R$ 67. Vender atual por R$ 150-200.
+            </div>
+          </div>
+
+          <div class="problem-card" style="border-color: #ef4444; background: #fee2e2;">
+            <div class="problem-header">
+              <span class="problem-title">❄️ CRÍTICO: Ar Condicionado</span>
+              <span class="problem-cost">R$ 1.800</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #7f1d1d; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Não refrigera adequadamente. Essencial para Recife.
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Em Recife, AC é OBRIGATÓRIO. Hóspedes cancelam ou reclamam.<br>
+              <strong>Perda mensal:</strong> -R$ 600 (recusas + avaliações ruins)<br>
+              <strong>ROI:</strong> 3 meses
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação Recomendada:</strong> Comprar Split 12.000 BTUs em 12x de R$ 150. Vender antigo por R$ 300-400.
+            </div>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-header">
+              <span class="problem-title">💧 URGENTE: Filtro de Água Quebrado</span>
+              <span class="problem-cost">R$ 120</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #78350f; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Resolver ESTA SEMANA.
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Item básico de higiene. Menção negativa garantida.<br>
+              <strong>Perda mensal:</strong> -R$ 150<br>
+              <strong>ROI:</strong> IMEDIATO
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação:</strong> Comprar no Mercado Livre (entrega em 2 dias) ou Leroy Merlin.
+            </div>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-header">
+              <span class="problem-title">🛏️ Pé da Cama Quebrado</span>
+              <span class="problem-cost">R$ 80</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #78350f; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Conserto simples. Marceneiro ou ferragem.
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Segurança e conforto comprometidos.<br>
+              <strong>Perda mensal:</strong> -R$ 100<br>
+              <strong>ROI:</strong> IMEDIATO
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação:</strong> Chamar Adelson (ele já fez serviço) ou comprar pé novo em loja de ferragens.
+            </div>
+          </div>
+
+          <div class="problem-card">
+            <div class="problem-header">
+              <span class="problem-title">🎨 Papel de Parede Soltando</span>
+              <span class="problem-cost">R$ 200</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #78350f; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Estética comprometida. Fotos ficam ruins.
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Primeira impressão negativa. Reduz conversão de visualizações em reservas.<br>
+              <strong>Perda mensal:</strong> -R$ 200<br>
+              <strong>ROI:</strong> IMEDIATO
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação:</strong> Procurar profissional de papel de parede ou trocar por pintura (mais barato).
+            </div>
+          </div>
+
+          <div class="problem-card" style="background: #dcfce7; border-color: #22c55e;">
+            <div class="problem-header">
+              <span class="problem-title">🔐 Senha Fechadura Eletrônica</span>
+              <span class="problem-cost" style="color: #22c55e;">GRÁTIS</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #15803d; margin-bottom: 0.5rem;">
+              <strong>Status:</strong> Fazer HOJE mesmo (5 minutos).
+            </p>
+            <div class="problem-impact">
+              <strong>Impacto:</strong> Segurança essencial. Senha antiga pode ter sido compartilhada.<br>
+              <strong>Risco:</strong> Invasão, roubo, ou problemas legais
+            </div>
+            <div style="margin-top: 1rem;">
+              <strong>✅ Ação:</strong> Seguir manual da fechadura ou chamar técnico se necessário.
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📊 Priorização por ROI</h2>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background: #f8fafc;">
+                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #e2e8f0;">Prioridade</th>
+                <th style="padding: 1rem; text-align: left; border-bottom: 2px solid #e2e8f0;">Problema</th>
+                <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Custo</th>
+                <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Impacto/Mês</th>
+                <th style="padding: 1rem; text-align: center; border-bottom: 2px solid #e2e8f0;">ROI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: #dcfce7;">
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 700;">1️⃣ AGORA</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Senha Fechadura</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #22c55e; font-weight: 700;">R$ 0</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">Segurança</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">IMEDIATO</td>
+              </tr>
+              <tr style="background: #dcfce7;">
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 700;">2️⃣ ESTA SEMANA</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Filtro + Pé Cama</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">R$ 200</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">-R$ 250</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">IMEDIATO</td>
+              </tr>
+              <tr style="background: #fef3c7;">
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 700;">3️⃣ OUT/2025</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Papel Parede</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">R$ 200</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">-R$ 200</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">1 mês</td>
+              </tr>
+              <tr style="background: #fee2e2;">
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 700;">4️⃣ NOV/2025</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Fogão (12x)</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">R$ 800</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">-R$ 300</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">2.7 meses</td>
+              </tr>
+              <tr style="background: #fee2e2;">
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9; font-weight: 700;">5️⃣ DEZ/2025</td>
+                <td style="padding: 1rem; border-bottom: 1px solid #f1f5f9;">Ar Condicionado (12x)</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">R$ 1.800</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9;">-R$ 600</td>
+                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid #f1f5f9; font-weight: 700;">3 meses</td>
+              </tr>
+              <tr style="background: #f8fafc; font-weight: 700;">
+                <td colspan="2" style="padding: 1rem;">TOTAL</td>
+                <td style="padding: 1rem; text-align: center; color: #ef4444;">R$ 3.000</td>
+                <td style="padding: 1rem; text-align: center; color: #22c55e;">+R$ 1.350/mês</td>
+                <td style="padding: 1rem; text-align: center;">2.2 meses</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background: #eff6ff; padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border-left: 4px solid #3b82f6;">
+            <p style="color: #1e40af; font-weight: 700; margin-bottom: 0.5rem;">💡 Estratégia Financeira:</p>
+            <ul style="margin-left: 1.5rem; color: #1e3a8a; line-height: 1.8;">
+              <li>Itens 1-3 (R$ 400): Pagar com recebimento de 05/10</li>
+              <li>Fogão e AC: Parcelar em 12x (R$ 67 + R$ 150 = R$ 217/mês)</li>
+              <li>Vender fogão e AC antigos: recuperar R$ 450-600</li>
+              <li>Resultado: Investimento real de R$ 2.400 com ROI de 2.2 meses</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="precificacao" class="tab-content">
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">💲 Calculadora de Precificação Inteligente</h2>
+          </div>
+
+          <div class="calculator">
+            <h3 style="color: #1e40af; margin-bottom: 1rem;">🎯 Defina sua Diária Ideal</h3>
+            
+            <div class="calculator-input">
+              <div class="input-group">
+                <label>Custo Fixo Mensal (R$)</label>
+                <input type="number" id="custoFixo" value="1332.31" oninput="calcularPreco()">
+                <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">Condomínio + IPTU + Energia + Internet + etc</span>
+              </div>
+
+              <div class="input-group">
+                <label>Custo Variável por Diária (R$)</label>
+                <input type="number" id="custoVariavel" value="35" oninput="calcularPreco()">
+                <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">Faxina + Lavanderia + Amenities</span>
+              </div>
+
+              <div class="input-group">
+                <label>Taxa Ocupação Esperada (%)</label>
+                <input type="number" id="ocupacao" value="60" min="30" max="100" oninput="calcularPreco()">
+                <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">Meta realista: 55-70%</span>
+              </div>
+
+              <div class="input-group">
+                <label>Margem de Lucro Desejada (%)</label>
+                <input type="number" id="margem" value="35" min="20" max="50" oninput="calcularPreco()">
+                <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">Padrão mercado: 30-40%</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="calcularPreco()" style="width: 100%; margin-top: 1rem;">
+              🧮 Calcular Diária Ideal
+            </button>
+
+            <div class="calculator-result">
+              <div class="result-label">💰 DIÁRIA RECOMENDADA:</div>
+              <div class="result-value" id="resultadoDiaria">R$ 195,00</div>
+              <p style="font-size: 0.85rem; color: #64748b; margin-top: 1rem;" id="detalhesCalculo"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📊 Análise de Mercado: Boa Viagem</h2>
+          </div>
+
+          <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+            <h3 style="color: #0f172a; margin-bottom: 1rem;">📍 Comparativo de Preços - Recife/Boa Viagem (Setembro 2025)</h3>
+            
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr style="background: white;">
+                  <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #e2e8f0;">Temporada</th>
+                  <th style="padding: 0.75rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Baixa</th>
+                  <th style="padding: 0.75rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Média</th>
+                  <th style="padding: 0.75rem; text-align: center; border-bottom: 2px solid #e2e8f0;">Alta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; font-weight: 600;">Mercado (concorrentes)</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9;">R$ 180-220</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9;">R$ 220-280</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9;">R$ 300-450</td>
+                </tr>
+                <tr style="background: #fee2e2;">
+                  <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; font-weight: 600;">Sua diária atual</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #ef4444; font-weight: 700;">R$ 148,72</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #ef4444;">-</td>
+                  <td style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #f1f5f9; color: #ef4444;">-</td>
+                </tr>
+                <tr style="background: #dcfce7;">
+                  <td style="padding: 0.75rem; font-weight: 600;">Recomendação</td>
+                  <td style="padding: 0.75rem; text-align: center; color: #22c55e; font-weight: 700;">R$ 200</td>
+                  <td style="padding: 0.75rem; text-align: center; color: #22c55e; font-weight: 700;">R$ 250</td>
+                  <td style="padding: 0.75rem; text-align: center; color: #22c55e; font-weight: 700;">R$ 350</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #ef4444;">
+              <p style="color: #991b1b; font-weight: 700; margin-bottom: 0.5rem;">⚠️ Você está SUBPRECIFICANDO em 26%!</p>
+              <p style="font-size: 0.9rem; color: #7f1d1d;">
+                Aumentar para R$ 200/diária (baixa) resultaria em <strong>+R$ 718/mês</strong> (14 diárias × R$ 51,28)
+              </p>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); padding: 1.5rem; border-radius: 12px; border: 2px solid #22c55e;">
+            <h3 style="color: #166534; margin-bottom: 1rem;">🎯 Estratégia de Precificação Dinâmica</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+              <div style="background: white; padding: 1rem; border-radius: 8px;">
+                <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem;">SEGUNDA-QUINTA</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">R$ 180</div>
+                <div style="font-size: 0.75rem; color: #15803d; margin-top: 0.25rem;">Baixa demanda</div>
+              </div>
+
+              <div style="background: white; padding: 1rem; border-radius: 8px;">
+                <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem;">SEXTA-DOMINGO</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">R$ 250</div>
+                <div style="font-size: 0.75rem; color: #15803d; margin-top: 0.25rem;">Alta demanda</div>
+              </div>
+
+              <div style="background: white; padding: 1rem; border-radius: 8px;">
+                <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem;">FERIADOS/EVENTOS</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">R$ 350+</div>
+                <div style="font-size: 0.75rem; color: #15803d; margin-top: 0.25rem;">Peak season</div>
+              </div>
+
+              <div style="background: white; padding: 1rem; border-radius: 8px;">
+                <div style="font-size: 0.75rem; color: #64748b; margin-bottom: 0.5rem;">ESTADIAS 7+ DIAS</div>
+                <div style="font-size: 1.5rem; font-weight: 900; color: #166534;">-15%</div>
+                <div style="font-size: 0.75rem; color: #15803d; margin-top: 0.25rem;">Desconto progressivo</div>
+              </div>
+            </div>
+
+            <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+              <p style="font-size: 0.85rem; color: #166534; font-weight: 600; margin-bottom: 0.5rem;">💡 Como Implementar no Booking.com:</p>
+              <ul style="margin-left: 1.5rem; font-size: 0.85rem; color: #15803d; line-height: 1.8;">
+                <li>Ativar "Preços Inteligentes" no painel</li>
+                <li>Configurar preço base: R$ 200</li>
+                <li>Ajuste automático para fins de semana: +25%</li>
+                <li>Desconto 7+ diárias: 15% automático</li>
+                <li>Revisar preços semanalmente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-header">
+            <h2 class="section-title">📈 Projeção de Receita com Novo Preço</h2>
+          </div>
+
+          <div class="scenario-comparison">
+            <div class="scenario-card current">
+              <h3 style="color: #ef4444; margin-bottom: 1rem;">❌ Cenário Atual</h3>
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="font-size: 0.85rem; color: #64748b;">Diária Média</p>
+                <p style="font-size: 1.8rem; font-weight: 900; color: #ef4444;">R$ 148,72</p>
+              </div>
+
+              <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>14 diárias/mês:</strong></p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: #991b1b;">R$ 2.082,08</p>
+              </div>
+
+              <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>Despesas:</strong></p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: #991b1b;">-R$ 2.588,37</p>
+              </div>
+
+              <div style="background: #fee2e2; padding: 1rem; border-radius: 8px; text-align: center;">
+                <p style="font-size: 0.85rem; color: #7f1d1d; margin-bottom: 0.25rem;">Lucro</p>
+                <p style="font-size: 1.8rem; font-weight: 900; color: #ef4444;">-R$ 506,29</p>
+                <p style="font-size: 0.75rem; color: #991b1b; margin-top: 0.5rem;">PREJUÍZO</p>
+              </div>
+            </div>
+
+            <div class="scenario-card improved">
+              <h3 style="color: #22c55e; margin-bottom: 1rem;">✅ Com Novo Preço</h3>
+              
+              <div style="margin-bottom: 1rem;">
+                <p style="font-size: 0.85rem; color: #64748b;">Diária Média</p>
+                <p style="font-size: 1.8rem; font-weight: 900; color: #22c55e;">R$ 220,00</p>
+              </div>
+
+              <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>18 diárias/mês (60%):</strong></p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: #166534;">R$ 3.960,00</p>
+              </div>
+
+              <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem;">
+                <p style="font-size: 0.85rem;"><strong>Despesas:</strong></p>
+                <p style="font-size: 1.3rem; font-weight: 700; color: #166534;">-R$ 2.400,00</p>
+              </div>
+
+              <div style="background: #dcfce7; padding: 1rem; border-radius: 8px; text-align: center;">
+                <p style="font-size: 0.85rem; color: #15803d; margin-bottom: 0.25rem;">Lucro</p>
+                <p style="font-size: 1.8rem; font-weight: 900; color: #22c55e;">+R$ 1.560,00</p>
+                <p style="font-size: 0.75rem; color: #166534; margin-top: 0.5rem;">39% margem</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 1.5rem; border-radius: 12px; margin-top: 1.5rem; border: 2px solid #f59e0b; text-align: center;">
+            <p style="font-size: 0.9rem; color: #92400e; margin-bottom: 0.5rem;">💰 GANHO MENSAL COM AJUSTE DE PREÇOS</p>
+            <p style="font-size: 3rem; font-weight: 900; color: #f59e0b;">+R$ 2.066,29</p>
+            <p style="font-size: 0.85rem; color: #78350f; margin-top: 0.5rem;">
+              De prejuízo de R$ 506 para lucro de R$ 1.560
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="background: #0f172a; color: white; padding: 2rem 0; margin-top: 4rem;">
+    <div class="container" style="text-align: center;">
+      <p style="font-size: 0.9rem; opacity: 0.8;">
+        Dashboard Executivo Golden View 1006 • Desenvolvido para gestão inteligente de locação por temporada
+      </p>
+      <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 0.5rem;">
+        Última atualização: 30/09/2025 às 18:47 • Próxima revisão: 05/10/2025
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function changeTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function toggleCheck(element) {
+      element.classList.toggle('completed');
+    }
+
+    function calcularPreco() {
+      const custoFixo = parseFloat(document.getElementById('custoFixo').value) || 1332.31;
+      const custoVariavel = parseFloat(document.getElementById('custoVariavel').value) || 35;
+      const ocupacao = parseFloat(document.getElementById('ocupacao').value) || 60;
+      const margem = parseFloat(document.getElementById('margem').value) || 35;
+
+      const diasMes = 30;
+      const diasOcupados = (diasMes * ocupacao) / 100;
+      
+      const custoFixoPorDiaria = custoFixo / diasOcupados;
+      const custoTotal = custoFixoPorDiaria + custoVariavel;
+      
+      const diariaIdeal = custoTotal / (1 - (margem / 100));
+      
+      const receitaMensal = diariaIdeal * diasOcupados;
+      const despesaMensal = custoFixo + (custoVariavel * diasOcupados);
+      const lucroMensal = receitaMensal - despesaMensal;
+      
+      document.getElementById('resultadoDiaria').textContent = 
+        'R$ ' + diariaIdeal.toFixed(2).replace('.', ',');
+      
+      document.getElementById('detalhesCalculo').innerHTML = `
+        Com ${diasOcupados.toFixed(0)} diárias/mês (${ocupacao}% ocupação):<br>
+        <strong>Receita:</strong> R$ ${receitaMensal.toFixed(2).replace('.', ',')} • 
+        <strong>Despesas:</strong> R$ ${despesaMensal.toFixed(2).replace('.', ',')} • 
+        <strong>Lucro:</strong> R$ ${lucroMensal.toFixed(2).replace('.', ',')} (${margem}%)
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      calcularPreco();
+    });
+  </script>
+</body>
+</html>
+              
