@@ -370,16 +370,17 @@
     { data: '16/07/2025', tipo: 'Despesa', valor: 251.96, descricao: 'Energia', categoria: 'Fixa', status: 'PAGO' },
     { data: '10/07/2025', tipo: 'Despesa', valor: 74.59, descricao: 'IPTU', categoria: 'Fixa', status: 'PAGO' },
     { data: '10/07/2025', tipo: 'Despesa', valor: 87.00, descricao: 'Stays', categoria: 'Fixa', status: 'PAGO' },
-    { data: '15/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business (umbler talk)', categoria: 'Fixa', status: 'PAGO' },
-    { data: '15/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automacoes', categoria: 'Fixa', status: 'PAGO' },
+    { data: '15/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'WhatsApp Business (umbler talk)', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
+    { data: '15/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automacoes', categoria: 'Fixa', status: 'PENDENTE ⚠️' },
 
     // Despesas Extras
     { data: '10/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Jogo de cama (2/3)', categoria: 'Extra', status: 'PAGO' },
     { data: '12/07/2025', tipo: 'Despesa', valor: 60.79, descricao: 'Compra no Pão de Açúcar', categoria: 'Extra', status: 'PAGO' },
-    { data: '18/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão Parcela 01 de 10 parcelas', categoria: 'Extra', status: 'PAGO' },
+    { data: '18/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Fogão Parcela 01 de 10 parcelas', categoria: 'Extra', status: 'PENDENTE ⚠️' },
 
     // Prestadores
     { data: '05/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO' },
+    { data: '05/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
     { data: '02/07/2025', tipo: 'Despesa', valor: 325.00, descricao: 'Prestação de serviços limpeza', categoria: 'Prestador', status: 'PAGO' },
     { data: '10/06/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JUNHO', categoria: 'Prestador', status: 'PAGO' },
     { data: '10/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JULHO', categoria: 'Prestador', status: 'PAGO' },
@@ -500,28 +501,25 @@ function gerarTabela(lista, titulo) {
     document.getElementById('resumo').innerHTML = `
      <hr><br>
     <h2>Resumo do Caixa - Julho 2025</h2><br>
-      <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <h4 style="color: #1976d2;">Continuidade de Junho:</h4>
-        <p><strong>Saldo Inicial (Junho):</strong> R$ ${saldoAnterior.toFixed(2)}</p>
-        <p><strong>Pendência Recebida (Joelmir):</strong> R$ ${pendenciaAnterior.toFixed(2)}</p>
-      </div>
+      SALDO INICIAL: 321,98<br>
+      Reservas Recebidas: R$2.523.63<br>
+      Despesas fixas pagas: R$905.50<br>
+      Despesas extras pagas: R$120.79<br> 
+      Prestadores pagos: R$739.50<br>
+
+      905.50 + 120.79 + 739.50 = R$1.765,79<br>
+      2.523,63 - 1.765,79 = R$757,84<br><br>
+      Saldo inicial + Receitas - Despesas = Saldo Final<br>
+      321,98 + 2.523,63 - 1.765,79 = R$1.079,82<br><br>
+      <strong>CAIXA FINAL JULHO 2025: R$1.079,82</strong><br><br>
+      <strong>OBSERVAÇÕES:</strong><br>
+      - ADM LUCAS JULHO PENDENTE - R$104.75<br>
+      - FOGÃO PARCELA 01 DE 10 - R$60.00<br>
+      - IPTU JULHO - 
+
+ 
       
-      <h4>Movimentação de Julho:</h4>
-      <p><strong>Receitas Julho:</strong> R$ ${totalReceitasJulho.toFixed(2)}</p>
-      <p><strong>Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
-      <p><strong>Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
-      <p><strong>Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
-      <p><strong>Total Despesas Julho:</strong> R$ ${totalDespesasJulho.toFixed(2)}</p>
-      
-      <hr><br>
-      <h3 style="color: #28a745;">💰 CAIXA FINAL JULHO: R$ 697.84 </h3>
-       <h3 style="color: #28a745;">💰 CAIXA FINAL JULHO + Saldo inicial 321.98 </h3>
-        <h3 style="color: #28a745;">💰 Saldo em caixa R$1.019,82 </h3>
-      <br>
-      <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
-        <h4 style="color: #856404;">🚨 Pendências para Agosto:</h4>
-        <p style="color: #c62828;"><strong>Receitas Aguardando Pagamento:<br></strong> ADM LUCAS 15%<br> 15% de 697,84 = 104,70</p>
-      </div>
+     
     `;
   }
 
