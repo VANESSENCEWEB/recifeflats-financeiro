@@ -287,19 +287,21 @@
     // Receitas Airbnb
     { data: '07/07/2025', tipo: 'Receita', valor: 560.19, descricao: 'AIRBNB - Marcus Brener' },
     { data: '12/07/2025', tipo: 'Receita', valor: 639.39, descricao: 'AIRBNB - Tatiana Saraiva' },
-    { data: '12/07/2025', tipo: 'Receita', valor: 1824, descricao: 'AIRBNB - Wesley Velloso' },
-    { data: '12/07/2025', tipo: 'Receita', valor: 400, descricao: 'AIRBNB - Isabela Vieira' },
+    { data: '12/07/2025', tipo: 'Receita', valor: 1824.94, descricao: 'AIRBNB - Wesley Velloso' },
+    { data: '12/07/2025', tipo: 'Receita', valor: 400.88, descricao: 'AIRBNB - Isabela Vieira' },
     { data: '12/07/2025', tipo: 'Receita', valor: 763.57, descricao: 'AIRBNB - Thiago Lacerda' },
+    { data: '12/07/2025', tipo: 'Receita', valor: 1813.49, descricao: 'AIRBNB - Lazaro Ferreira' },
+
 
 
     // Despesas Fixas
-    { data: '10/07/2025', tipo: 'Despesa', valor: 770.43, descricao: 'Condomínio Julho', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 290.22, descricao: 'Energia JULHO', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 138.47, descricao: 'Internet', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 241.36, descricao: 'Iptu', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 86.73, descricao: 'Stays', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'Whatssap Business (umbler talk)', categoria: 'Fixa' },
-    { data: '10/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automacoes', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 770.43, descricao: 'Condomínio Julho - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 290.22, descricao: 'Energia JULHO - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 138.47, descricao: 'Internet - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 241.36, descricao: 'Iptu - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 86.73, descricao: 'Stays - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'Whatssap Business (umbler talk) - Pago ✅', categoria: 'Fixa' },
+    { data: '10/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Zapier automacoes - Pago ✅', categoria: 'Fixa' },
  
     // Despesas Extras
     { data: '12/07/2025', tipo: 'Despesa', valor: 12.55, descricao: 'Uber Ramon', categoria: 'Extra' },
@@ -308,13 +310,16 @@
     { data: '12/07/2025', tipo: 'Despesa', valor: 33.00, descricao: 'Atacado da Construcao', categoria: 'Extra' },
     { data: '12/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Extra' },
     { data: '12/07/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Conta de Agua', categoria: 'Extra' },
+    { data: '12/07/2025', tipo: 'Despesa', valor: 7.00, descricao: 'Algodāo', categoria: 'Extra' },
+
 
 
     // Prestadores
     { data: '23/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador' },
     { data: '23/07/2025', tipo: 'Despesa', valor: 325.00, descricao: 'Serviços limpeza', categoria: 'Prestador' },
-    { data: '23/07/2025', tipo: 'Despesa', valor: 93.75, descricao: 'Contabilidade julho', categoria: 'Prestador' },
-    { data: '23/07/2025', tipo: 'Despesa', valor: 50.00, descricao: 'Omie app junho + julho', categoria: 'Prestador' },
+    { data: '23/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade julho', categoria: 'Prestador' },
+    { data: '23/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade junho', categoria: 'Prestador' },
+    { data: '23/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie app junho + julho', categoria: 'Prestador' },
     { data: '23/07/2025', tipo: 'Despesa', valor: 433.92, descricao: 'Lucas adm', categoria: 'Prestador' },
 ];
 
@@ -378,9 +383,24 @@ function gerarTabela(lista, titulo) {
       <p><strong>Total Receitas:</strong> R$ ${totalReceitas.toFixed(2)}</p>
       <p><strong>Despesas Fixas:</strong> R$ ${totalFixas.toFixed(2)}</p>
       <p><strong>Despesas Extras:</strong> R$ ${totalExtras.toFixed(2)}</p>
-      <p><strong>Prestadores:</strong> R$ ${totalPrestadores.toFixed(2)}</p>
+      <p><strong>Prestadores:</strong> R$640 </p>
       <hr><br>
-      <p><strong><h2>Caixa Final:</h2></strong> R$ ${caixaFinal.toFixed(2)}</p>
+      TOTAL DE DESPESAS: R$ 2.549,00<br><br>
+      <p><strong><h2>Caixa Final:</h2></strong> RECEITAS - TOTAL DE DESPESAS: 6002-2549= 3.453</p>
+
+      <p style="font-size: 0.9rem; color: blue;">COMISSAO LUCAS 15% = 15% DE 3.453 = R$ 517,95</p>
+      <p style="font-size: 0.9rem; color: green;">Novo Calculo apos comissao de Lucas</p>
+
+      <p><strong><h2>Caixa Final após comissão:</h2></strong> 
+        Receitas: 6.002<br>
+        - Despesas Fixas: 1.602,21<br>
+        - Despesas Extras: 307,42<br>
+        - Prestadores: 1.157,45<br>
+        Total novo de Despesas: 3.067,08<br>
+
+        Receita - Total de Despesas = 6.002 - 3.067,08<br><br>
+        <strong>Caixa Final = R$ 2.934,92</strong> com todas as despesas pagas.
+        -
     `;
   }
 
