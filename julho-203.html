@@ -322,10 +322,7 @@
 
 <!-- RESUMO MÊS ANTERIOR -->
 <div class="resumo-anterior">
-  <h3>📋 Resumo do Mês Anterior (Junho 2025)</h3>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-    <div><strong>Receitas Junho:</strong> R$ 2.665,80</div>
-    <div><strong>Despesas Junho:</strong> R$ 2.347,42</div>
+
     <div><strong>Saldo Junho:</strong> R$ 321,98</div>
     <div style="color: #c62828;"><strong>ATUALIZADO</strong> VANESSA RAFAELLA 10/09/2025</div>
   </div>
@@ -380,7 +377,7 @@
 
     // Prestadores
     { data: '05/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO' },
-    { data: '05/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+    { data: '05/07/2025', tipo: 'Despesa', valor: 252.00, descricao: 'Adm Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
     { data: '02/07/2025', tipo: 'Despesa', valor: 325.00, descricao: 'Prestação de serviços limpeza', categoria: 'Prestador', status: 'PAGO' },
     { data: '10/06/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JUNHO', categoria: 'Prestador', status: 'PAGO' },
     { data: '10/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JULHO', categoria: 'Prestador', status: 'PAGO' },
@@ -500,23 +497,25 @@ function gerarTabela(lista, titulo) {
 
     document.getElementById('resumo').innerHTML = `
      <hr><br>
-    <h2>Resumo do Caixa - Julho 2025</h2><br>
-      SALDO INICIAL: 321,98<br>
-      Reservas Recebidas: R$2.523.63<br>
-      Despesas fixas pagas: R$905.50<br>
-      Despesas extras pagas: R$120.79<br> 
-      Prestadores pagos: R$739.50<br>
-
-      905.50 + 120.79 + 739.50 = R$1.765,79<br>
-      2.523,63 - 1.765,79 = R$757,84<br><br>
-      Saldo inicial + Receitas - Despesas = Saldo Final<br>
-      321,98 + 2.523,63 - 1.765,79 = R$1.079,82<br><br>
-      <strong>CAIXA FINAL JULHO 2025: R$1.079,82</strong><br><br>
-      <strong>OBSERVAÇÕES:</strong><br>
-      - ADM LUCAS JULHO PENDENTE - R$104.75<br>
-      - FOGÃO PARCELA 01 DE 10 - R$60.00<br>
-      - IPTU JULHO - 
-
+    
+<p>✨ <strong>Resumo do Caixa – Julho/2025 (Apto 203)</strong><br><br>
+💰 <strong>Saldo inicial:</strong> R$ 321,98<br>
+🏠 <strong>Receitas de reservas:</strong> R$ 2.523,63<br><br>
+📊 <strong>Despesas fixas:</strong><br>
+– Pagas: R$ 830,50<br>
+– Pendentes: R$ 75,00<br>
+🧾 <strong>Despesas extras:</strong><br>
+– Pagas: R$ 120,79<br>
+– Pendentes: R$ 60,00<br><br>
+👷‍♀️ <strong>Prestadores de serviço:</strong><br>
+– Pagos: R$ 739,50<br>
+– Pendentes: R$ 252,00<br><br>
+📈 <strong>Resumo geral:</strong><br>
+➡️ Total de <strong>despesas pagas:</strong> R$ 1.690,79<br>
+➡️ Total de <strong>pendências:</strong> R$ 387,00<br>
+➡️ <strong>Caixa atual (provisório):</strong> R$ 1.154,82<br><br>
+💡 <em>Ou seja, Vanessa Rafaella, em julho o apartamento 105 encerrou com cerca de <strong>R$ 1.154,82 livres no caixa</strong>, considerando todas as despesas já quitadas e o saldo inicial.</em>
+</p>
  
       
      
