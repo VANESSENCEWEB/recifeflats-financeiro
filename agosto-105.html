@@ -315,10 +315,10 @@
   <div class="resumo-anterior">
     <h3>📋 Resumo do Mês Anterior (Julho 2025)</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-      <div><strong>Saldo Final Julho:</strong> R$ 1.921,15</div>
-      <div><strong>Receitas Julho:</strong> R$ 2.880,15</div>
-      <div><strong>Despesas Julho:</strong> R$ 2.010,30</div>
-      <div style="color: #28a745;"><strong>Saldo inicial para Agosto: R$ 1.921,15</strong></div>
+      <div><strong>Saldo Final Julho:</strong> R$ 2.064,51</div>
+      <div><strong>DESPESAS PENDENTES EM JULHO</strong> R$ 169,25</div>
+    
+      <div style="color: #28a745;"><strong>Saldo inicial para Agosto: R$ 2.064,51</strong></div>
     </div>
   </div>
 
@@ -373,12 +373,14 @@ const dados = [
 
   // PRESTADORES
   { data: '10/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO ✅' },
-  { data: '10/08/2025', tipo: 'Despesa', valor: 0.00, descricao: 'Adm Lucas (15% receitas)', categoria: 'Prestador', status: 'PENDENTE⚠️' },
+  { data: '10/08/2025', tipo: 'Despesa', valor: 137.33, descricao: 'Adm Lucas (15% receitas)', categoria: 'Prestador', status: 'PENDENTE⚠️' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '10/08/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '12/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Bárbara', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '18/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '22/08/2025', tipo: 'Despesa', valor: 60.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+  { data: '22/08/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Faxina Lucas', categoria: 'Prestador', status: 'PENDENTE ⚠️' },
+
   { data: '24/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '27/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '31/08/2025', tipo: 'Despesa', valor: 120.00, descricao: 'Faxina Ramon', categoria: 'Prestador', status: 'PAGO ✅' }
@@ -512,7 +514,7 @@ function atualizarAbas() {
   // Gerar resumo
   document.getElementById('resumo').innerHTML = `
     <hr><br>
-    <h2>Resumo do Caixa - Agosto 2025<br><br> -----------------------------------<br><strong>Saldo Final em Caixa: R$ 3.316,00</strong></h2><br>
+    <h2>Resumo do Caixa - Agosto 2025<br><br> -----------------------------------<br><strong>Saldo Final em Caixa: R$ 3.314,00</strong></h2><br>
     
    
     
@@ -525,25 +527,25 @@ function atualizarAbas() {
     <strong>Receita Recebida:</strong> R$ 3.343,30<br>
     <strong>Despesas Fixas :</strong> R$ 1.232,24<br>
     <strong>Despesas Extras:</strong> R$ 251,78<br>
-    <strong>Prestação de Serviço:</strong> R$ 843,75<br>
-    <strong>Total de Despesas:</strong> <span style="color:#c82333;">R$ 2.326,00</span><br>
-    <strong>Lucro Bruto:</strong> R$ 1.017,00<br>
-    <strong>Gestão de Lucros (15%):</strong> R$ 152,55
+    <strong>Prestação de Serviço:</strong> R$ 943,75<br>
+    <strong>Total de Despesas:</strong> <span style="color:#c82333;">R$ 2.427,77</span><br>
+    <strong>Lucro Bruto:</strong> R$ 915,53<br>
+    <strong>Gestão de Lucros (15%):</strong> R$ 137,33
   </p>
   <hr style="border: 1px solid #28a745;">
 
 </div>
 
 <div style="background: #d1ecf1; padding: 20px; border-radius: 8px; border-left: 6px solid #17a2b8; margin-bottom: 1.5rem;">
-  <h4 style="color: #0c5460; margin-top: 0;">📈 Saldo inicial: R$ 2.065,00</h4>
+  <h4 style="color: #0c5460; margin-top: 0;">📈 Saldo inicial: R$ 2.064,51</h4>
   <p style="color: #0c5460; line-height: 1.6;">
     <strong>Receitas Recebidas em Agosto</strong> R$ 3.343,30<br>
-    <strong>Total: </strong> R$ 5.408.00<br>
+    <strong>Total: </strong> R$ 5.407.8100<br>
     <strong>Despesas Fixas Paga:</strong> - R$ 1.157,245<br>
     <strong>Despesas Extra Paga: </strong> R$ 152,90<br>
     <strong>Prestacao de Servico: :</strong> R$ 783,75<br>
     <strong>Total Despesas Pagas:</strong> - R$ 2.093,00<br>
-    R$ 5.408,00 - R$ 2.093,00 = <strong>Saldo Final em Caixa: R$ 3.316,00</strong>
+    R$ 5.407,00 - R$ 2.093,00 = <strong>Saldo Final em Caixa: R$ 3.314,00</strong>
   </p>
 </div>
 
@@ -553,8 +555,12 @@ function atualizarAbas() {
     <li>WhatsApp Business + Zapier: R$ 75,00</li>
     <li>Mercado: R$ 68,48 (Lucas)</li>
     <li>Mercado: R$ 30,40 (Lucas)</li>
-    <li>Gestão de Lucas(15%): R$ 152,55</li>
+    <li>Gestão de Lucas(15%): R$ 137,33</li>
     <li>Faxina Lucas: R$ 60,00</li>
+    <li>Faxina Lucas: R$ 100,00</li>
+    + DESPESAS PENDENTES DE JULHO 169,25<br>
+    Totalizando: R$ 640,46 de despesas pendentes JULHO+AGOSTO<br>
+
   </ul>
 </div>
   `;
