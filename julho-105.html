@@ -375,9 +375,8 @@ const dados = [
   // PRESTADORES
   { data: '10/07/2025', tipo: 'Despesa', valor: 100.00, descricao: 'Adm Gabriela', categoria: 'Prestador', status: 'PAGO ✅ (Vanessa)' },
   { data: '09/07/2025', tipo: 'Despesa', valor: 325.00, descricao: 'Prestação de serviços limpeza (09-16/07)', categoria: 'Prestador', status: 'PAGO ✅' },
-  { data: '10/07/2025', tipo: 'Despesa', valor: 305.00, descricao: 'Comissão Lucas', categoria: 'Prestador', status: 'PENDENTE⚠️' },
-  { data: '10/07/2025', tipo: 'Despesa', valor: 94.75, descricao: 'Contabilidade JUNHO', categoria: 'Prestador', status: 'PAGO ✅' },
-  { data: '10/07/2025', tipo: 'Despesa', valor: 58.75, descricao: 'Contabilidade JULHO', categoria: 'Prestador', status: 'PAGO ✅' },
+  { data: '10/07/2025', tipo: 'Despesa', valor: 94.25, descricao: 'Comissão Lucas', categoria: 'Prestador', status: 'PENDENTE⚠️' },
+  { data: '10/07/2025', tipo: 'Despesa', valor: 153.50, descricao: 'Contabilidade JUNHO E JULHO', categoria: 'Prestador', status: 'PAGO ✅' },
   { data: '10/07/2025', tipo: 'Despesa', valor: 25.00, descricao: 'Omie', categoria: 'Prestador', status: 'PAGO ✅ (Vanessa)' }
 ];
 
@@ -515,40 +514,65 @@ function atualizarAbas() {
     <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
       <h4 style="color: #856404;">📝 Pendências Importantes:</h4>
       <p style="color: #c62828;"><strong>• Zapier + WPP:</strong> R$ 75,00(WhatsApp + Zapier)</p>
-      <p style="color: #c62828;"><strong>• Comissão Lucas:</strong> 140.85</p>
+      <p style="color: #c62828;"><strong>• Comissão Lucas:</strong> 94.25</p>
      
-      Saldo inicial: R$1051.30<br>
-      Receitas recebidas: R$2.570,31<br>
-      Retencao caucao: R$130.00<br>
-      Total Receitas: R$2.880,15<br>
+      Saldo inicial: R$1051.30<br><br>
+      Receitas recebidas: R$2.570,31<br><br>
+      Retencao caucao: R$130.00<br><br>
+      <strong>Total Receitas: R$2.880,15</strong><br><br><br>
+
+      ========== DESPESAS =========== <br>
 
       Despesas fixas pagas: R$1.096,65<br>
-      Despesas extras pagas: R$166.79<br>
+      Despesas fixas pendentes: R$75,00<br>
+      Total de Despesas fixas no mes : R$1.171,65<br><br>
+
+
+      Despesas extras pagas: R$166.79<br><br>
+
       Prestadores pagos: R$603.50<br>
+      Prestadores pendentes:  94.25 - Adm Lucas<br>
+
+
       Total Despesas pagas: R$1.866,94<br>
+      Total Despesas : R$1.942,04<br><br>
 
-      Pendentes: <br>
-      75.00 + 140.85 = R$215.85<br>
+      ====================== COMISSAO DE LUCAS ===========<br>
 
-      Receitas 2.880,15 - Despesas R$ 1.866.29 + 75,00 <br>
-      2.880 - 1.941 = R$939<br>
-      15 % lucas = R$140,85<br>
+      Total de Receitas - Total de despesas no mes = R$2.570,31 - R$1.942,03<br>
+      Valor Apurado no mes  - DESPESAS do mes =<br>
+      2.570,31-1.942,04 = 628,31<br>
+      Receitas - Despesas= 628,31<br>
+        15 % lucas = 94,25<br><br>
 
-      Saldo inicial + todas receitas recebidas = R$3.931<br>
+
+--------------------------------------------------------Pendentes: <br>
+      75.00 + 94.25 = R$169,25<br><br>
+
+     ====== VALOR REAL EM CAIXA ==========<br>
+
+      <p>Valor REAL EM CAIXA:</p><br>
+      Saldo inicial : R$1.051,30<br>
+      + todas receitas recebidas = R$2880,15<br>
       - despesas pagas R$ 1.866,94<br>
-      Saldo atual no caixa: R$2.065,00<br>
-      - pendentes R$215,85<br>
+      1.051,30+ 2880,15= 3.931,45 (SALDO INICIAL + RECEITAS RECEBIDAS NO MES)<br>
+      3.931,45 - 1.866,94 = 2.064,51 ( SOMA DO SALDO INICIAL + RECEITAS RECEBIDAS NO MES - DESPESAS PAGAS NO MES <br><br>
+
+      <strong>Saldo atual no caixa no fim de julho de 2025: R$2.064,51</strong><br><br>
+
+
+      ========= VALOR REAL NO MES DE JULHO, ARRECADADO COM A ACOMODACAO 105, DESCONSIDERANDO<br>
+      valor inicial, apenas as receitas - despesas: <br>
+
+
+      628,31 - 94,25 = R$ 534.06<br>
+
+      
     
     <br>
     <div style="background: #d1ecf1; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8;">
-      <h4 style="color: #0c5460;">📈 Projeção Completa (se tudo for recebido):</h4>
-      <p style="color: #0c5460;">
-        <strong>Saldo Inicial:</strong> R$ ${saldoInicialJulho.toFixed(2)}<br>
-        <strong>+ Total Receitas:</strong> R$ ${totalReceitasJulho.toFixed(2)}<br>
-        <strong>- Total Despesas (incluindo pendentes):</strong> R$ ${(totalFixas + totalExtras + totalPrestadores).toFixed(2)}<br>
-        <strong>- Comissão Lucas (estimada):</strong> R$ 0,00 (a calcular)<br>
-        <hr style="border: 1px solid #17a2b8; margin: 10px 0;">
-        <strong>💡 Saldo Projetado Final:</strong> R$ ${(saldoInicialJulho + totalReceitasJulho - (totalFixas + totalExtras + totalPrestadores)).toFixed(2)}
+      <h4 style="color: #0c5460;">SALDO ATUAL NO FIM DE JULHO REAL NO CAIXA R$2.064,51</h4>
+     
       </p>
     </div>
   `;
